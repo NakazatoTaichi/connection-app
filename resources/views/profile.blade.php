@@ -9,5 +9,10 @@
 </head>
 <body>
     {{\Illuminate\Support\Facades\Auth::user()->name}}でログインしています。
+
+    <form action="{{route('user.logout')}}" method="post">
+        @csrf
+        <button>ログアウト</button>
+    </form>
 </body>
 </html>
