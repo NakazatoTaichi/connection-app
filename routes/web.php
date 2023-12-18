@@ -21,7 +21,7 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Route::get('/register', [\App\Http\Controllers\UserController::class, 'showRegister']);
+Route::get('/register', [\App\Http\Controllers\UserController::class, 'showRegister'])->name('register');
 Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
 
 Route::middleware('auth')->group(function () {
@@ -29,3 +29,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout'])->name('user.logout');
 });
+
+Route::get('/login', [\App\Http\Controllers\UserController::class, 'showLogin']);
+
+Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');;
