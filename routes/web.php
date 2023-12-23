@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,10 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/login', [\App\Http\Controllers\UserController::class, 'showLogin']);
 
-Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');;
+Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/users', [ChatController::class, 'users'])->name('user.index');
+    Route::get('/chat/{user}', [ChatController::class, 'show'])->name('chat.show');
+    Route::post('/chat/send/{user}', [ChatController::class, 'send'])->name('chat.send');
+});
