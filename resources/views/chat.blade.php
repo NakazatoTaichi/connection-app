@@ -42,7 +42,7 @@
             background-color: #f0f0f0;
             border-radius: 10px;
             padding: 10px;
-            margin-bottom: 10px;
+            width: fit-content;
             max-width: 50%;
             word-wrap: break-word;
             margin-left: 0;
@@ -52,15 +52,16 @@
             background-color: #3490dc;
             border-radius: 10px;
             padding: 10px;
-            margin-bottom: 10px;
             color: #fff;
+            width: fit-content;
             max-width: 50%;
             word-wrap: break-word;
             margin-left: auto;
             font-size: 24px;
+            /* direction: rtl; */
+            text-align: left;
         }
         .timestamp {
-            font-size: 0.8em;
             color: #777;
         }
         .fixed-bottom-input {
