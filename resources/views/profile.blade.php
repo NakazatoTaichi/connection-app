@@ -9,10 +9,10 @@
 </head>
 <body>
     {{\Illuminate\Support\Facades\Auth::user()->name}}でログインしています。
-
     <form action="{{route('user.logout')}}" method="post">
         @csrf
         <button>ログアウト</button>
     </form>
+    <a href="{{ route('user.index')}}">ユーザ一覧</a>
 </body>
 </html>
