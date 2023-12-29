@@ -11,15 +11,17 @@
     <div class="container mt-5">
         <div class="card">
             <div class="card-body">
-                <div id="chat-messages" style="max-height: 600px; overflow-y: auto;">
-                    @foreach ($messages as $message)
-                        <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
-                            <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
-                                {{ $message->message }}
+                <div class="overflow-scroll" style="height: 600px;">
+                    <div id="scroll-inner">
+                        @foreach ($messages as $message)
+                            <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
+                                <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
+                                    {{ $message->message }}
+                                </div>
+                                <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
                             </div>
-                            <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,12 +79,8 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
-        // メッセージ送信後にスクロールを一番下に移動
-        document.getElementById('chat-form').addEventListener('submit', function() {
-            setTimeout(function() {
-                document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
-            }, 500);
-        });
+        let target = document.getElementById('scroll-inner');
+        target.scrollIntoView(false);
     </script>
 </body>
 </html>
