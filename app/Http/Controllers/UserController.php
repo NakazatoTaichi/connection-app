@@ -33,12 +33,43 @@ class UserController extends Controller
 
         Auth::login($user);
 
-        return redirect()->route('profile');
+        return redirect()->route('home');
     }
 
-    public function profile()
+    public function home()
     {
-        return view('profile');
+        $user = Auth::user();
+
+        return view('home', ['user' => $user]);
+    }
+
+    public function MyProfile()
+    {
+        $user = Auth::user();
+
+        return view('myProfile', ['user' => $user]);
+    }
+
+    public function updateProfile(Request $request, User $user)
+    {
+        // $user = Auth::user();
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        // パスワードの変更があれば処理
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
+
+        // アイコンのアップロードがあれば処理
+        if ($request->hasFile('icon')) {
+            $iconName = Str::random(20) . '.' . $request->file('icon')->getClientOriginalName();
+            $iconPath = $request->file('icon')->storeAs('public/icons', $iconName);
+            $user->icon = $iconName;
+        }
+        $user->save();
+
+        return redirect()->route('myProfile');
     }
 
     public function logout()
@@ -63,7 +94,7 @@ class UserController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('profile');
+            return redirect()->intended('home');
         }
 
         return back();
