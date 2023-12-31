@@ -7,10 +7,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <title>登録画面</title>
 </head>
-<body>
+<body class="bg-light">
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-md-8 bg-light">
+            <div class="col-md-8 bg-white">
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <h1 class="text-center my-4">新規登録</h1>
