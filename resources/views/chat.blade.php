@@ -1,40 +1,35 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <title>Document</title>
-</head>
-<body>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-body">
-                <div class="overflow-scroll" style="height: 600px;">
-                    <div id="scroll-inner">
-                        @foreach ($messages as $message)
-                            <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
-                                <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
-                                    {{ $message->message }}
-                                </div>
-                                <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
+@extends('layouts.layout');
+
+@section('title','チャット画面')
+
+@section('main')
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <div class="overflow-scroll" style="height: 600px;">
+                <div id="scroll-inner">
+                    @foreach ($messages as $message)
+                        <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
+                            <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
+                                {{ $message->message }}
                             </div>
-                        @endforeach
-                    </div>
+                            <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
-        <div class="fixed-bottom-input">
-            <form id="chat-form" method="POST" action="{{ route('chat.send', $user) }}">
-                @csrf
-                <div class="input-group">
-                    <input type="text" name="message" class="form-control" placeholder="メッセージを入力" aria-label="メッセージを入力" aria-describedby="button-send" style="min-height: 50px;">
-                    <button class="btn btn-primary" type="submit" id="button-send">送信</button>
-                </div>
-            </form>
-        </div>
     </div>
+    <div class="fixed-bottom-input">
+        <form id="chat-form" method="POST" action="{{ route('chat.send', $user) }}">
+            @csrf
+            <div class="input-group">
+                <input type="text" name="message" class="form-control" placeholder="メッセージを入力" aria-label="メッセージを入力" aria-describedby="button-send" style="min-height: 50px;">
+                <button class="btn btn-primary" type="submit" id="button-send">送信</button>
+            </div>
+        </form>
+    </div>
+</div>
     <style>
         /* 追加のスタイル設定 */
         .message-container {
@@ -77,10 +72,8 @@
             border-top: 1px solid #ddd;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
     <script>
         let target = document.getElementById('scroll-inner');
         target.scrollIntoView(false);
     </script>
-</body>
-</html>
+@endsection
