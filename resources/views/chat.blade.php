@@ -78,6 +78,7 @@
         let target = document.getElementById('scroll-inner');
         target.scrollIntoView(false);
     </script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.29.1/moment.min.js"></script>
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
     <script>
         Pusher.logToConsole = true;
@@ -98,7 +99,13 @@
 
             var timestampDiv = document.createElement('div');
             timestampDiv.className = 'timestamp';
-            timestampDiv.innerHTML = data.chat.created_at;
+            var timestamp = new Date(data.chat.created_at);
+            var formattedTimestamp = timestamp.toLocaleTimeString('ja-JP', { hour: 'numeric', minute: 'numeric' });
+
+            var formattedTimestamp = moment(data.chat.created_at).format('HH:mm');
+
+            timestampDiv.innerHTML = formattedTimestamp;
+            // timestampDiv.innerHTML = data.chat.created_at;
 
             newMessageContainer.appendChild(messageDiv);
             newMessageContainer.appendChild(timestampDiv);
