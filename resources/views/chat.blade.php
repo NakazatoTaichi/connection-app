@@ -6,7 +6,7 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-body">
-            <div class="overflow-scroll" style="height: 600px;">
+            <div class="overflow-scroll" style="height: 500px;">
                 <div id="scroll-inner">
                     <div id="chat-area">
                         @foreach ($messages as $message)
