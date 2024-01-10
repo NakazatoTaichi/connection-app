@@ -41,4 +41,5 @@ Route::middleware('auth')->group(function () {
 
     //友だち登録関係
     Route::get('/friends', [FriendController::class, 'index'])->name('friend.index');
+    Route::get('/friends/friendRegister', [FriendController::class, 'friendRegister'])->name('friend.friendRegister');
 });

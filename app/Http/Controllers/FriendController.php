@@ -10,8 +10,9 @@ class FriendController extends Controller
     {
         return view('friends.index');
     }
-    // public function friendRegister()
-    // {
-    //     return view()
-    // }
+
+    public function friendRegister()
+    {
+        return view('friends.friendRegister');
+    }
 }
