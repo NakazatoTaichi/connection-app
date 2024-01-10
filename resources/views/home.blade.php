@@ -3,9 +3,9 @@
 @section('title','ホーム画面')
 
 @section('main')
-    <div class="container mt-5">
+    <div class="container pt-5">
         <h1>Home</h1>
-        <div class="my-4">
+        {{-- <div class="my-4">
             @if ($user->icon)
                 <img src="{{ asset('storage/icons/' . $user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
             @else
@@ -16,7 +16,7 @@
         <form action="{{route('user.logout')}}" method="post">
             @csrf
             <button>ログアウト</button>
-        </form>
+        </form> --}}
         <div class="row mt-3">
             <div class="col-md-3">
                 <a href="{{ route('user.index') }}">ユーザ一覧</a>
