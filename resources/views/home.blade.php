@@ -22,7 +22,7 @@
                 <a href="{{ route('user.index') }}">ユーザ一覧</a>
             </div>
             <div class="col-md-3">
-                <a href="{{ route('user.index') }}">フレンド一覧</a>
+                <a href="{{ route('friend.index') }}">フレンド一覧</a>
             </div>
             <div class="col-md-3">
                 <a href="{{ route('myProfile') }}">プロフィール編集</a>

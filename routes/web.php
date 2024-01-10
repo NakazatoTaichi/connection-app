@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
-
+use App\Http\Controllers\FriendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,7 +34,11 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [UserController::class, 'logout'])->name('user.logout');
 
+    //チャット画面関係
     Route::get('/users', [ChatController::class, 'users'])->name('user.index');
     Route::get('/chat/{user}', [ChatController::class, 'show'])->name('chat.show');
     Route::post('/chat/send/{user}', [ChatController::class, 'send'])->name('chat.send');
+
+    //友だち登録関係
+    Route::get('/friends', [FriendController::class, 'index'])->name('friend.index');
 });
