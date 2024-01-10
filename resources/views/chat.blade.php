@@ -1,9 +1,9 @@
-@extends('layouts.layout')
+@extends('layouts.subLayout')
 
 @section('title', 'チャット画面')
 
 @section('main')
-<div class="container mt-3" style="padding: 20px;">
+<div class="container" style="padding: 20px;">
     <div class="sender py-3 row" style="font-size: 1.5rem;">
         <div class="col-2">
             <a style="text-decoration:none;" href="{{ route('user.index') }}">
@@ -43,7 +43,6 @@
     </div>
 </div>
     <style>
-        /* 追加のスタイル設定 */
         .main {
             background-color: #d5f0d4;
         }
