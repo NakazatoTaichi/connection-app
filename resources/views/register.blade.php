@@ -1,4 +1,4 @@
-@extends('layouts.layout');
+@extends('layouts.subLayout')
 
 @section('title','新規登録画面')
 

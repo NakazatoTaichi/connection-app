@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Chat;
 use App\Models\User;
+use App\Events\MessageSent;
 
 class ChatController extends Controller
 {
@@ -37,6 +38,8 @@ class ChatController extends Controller
         $message->user_id = Auth::id();
         $message->recipient_id = $user->id;
         $message->save();
+
+        event(new MessageSent($message));
 
         return back();
     }

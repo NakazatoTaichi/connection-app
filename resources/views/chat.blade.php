@@ -1,21 +1,33 @@
-@extends('layouts.layout');
+@extends('layouts.subLayout')
 
-@section('title','チャット画面')
+@section('title', 'チャット画面')
 
 @section('main')
-<div class="container mt-5">
+<div class="container" style="padding: 20px;">
+    <div class="sender py-3 row" style="font-size: 1.5rem;">
+        <div class="col-2">
+            <a style="text-decoration:none;" href="{{ route('user.index') }}">
+                戻る
+            </a>
+        </div>
+        <div class="col-8 text-center">
+            <b>{{ $user->name }}</b>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
-            <div class="overflow-scroll" style="height: 600px;">
+            <div class="overflow-scroll" style="height: 500px;">
                 <div id="scroll-inner">
-                    @foreach ($messages as $message)
-                        <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
-                            <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
-                                {{ $message->message }}
+                    <div id="chat-area">
+                        @foreach ($messages as $message)
+                            <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
+                                <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
+                                    {{ $message->message }}
+                                </div>
+                                <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
                             </div>
-                            <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -31,7 +43,9 @@
     </div>
 </div>
     <style>
-        /* 追加のスタイル設定 */
+        .main {
+            background-color: #d5f0d4;
+        }
         .message-container {
             margin-bottom: 10px;
         }
@@ -55,7 +69,6 @@
             word-wrap: break-word;
             margin-left: auto;
             font-size: 24px;
-            /* direction: rtl; */
             text-align: left;
         }
         .timestamp {
@@ -75,5 +88,36 @@
     <script>
         let target = document.getElementById('scroll-inner');
         target.scrollIntoView(false);
+    </script>
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+    <script>
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher('bf5e6c5cbc26da5c80b0', {
+            cluster: 'ap3'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+
+            var newMessageContainer = document.createElement('div');
+            newMessageContainer.className = 'message-container ' + (data.user_id === {{ auth()->user()->id }} ? 'text-end' : 'text-start');
+
+            var messageDiv = document.createElement('div');
+            messageDiv.className = data.chat.user_id === {{ auth()->user()->id }} ? 'sent-message' : 'received-message';
+            messageDiv.innerHTML = data.chat.message;
+
+            var timestampDiv = document.createElement('div');
+            timestampDiv.className = 'timestamp';
+            timestampDiv.innerHTML = data.chat.created_at;
+
+            newMessageContainer.appendChild(messageDiv);
+            newMessageContainer.appendChild(timestampDiv);
+
+            document.getElementById('chat-area').appendChild(newMessageContainer);
+
+            let target = document.getElementById('scroll-inner');
+            target.scrollIntoView(false);
+        });
     </script>
 @endsection
