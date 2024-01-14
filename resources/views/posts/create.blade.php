@@ -8,7 +8,7 @@
     <div class="post-form">
         <div class="row justify-content-center">
             <div class="col-md-8 bg-info-subtle">
-                {{-- <form action="{{ route('post.store', ['user_id' => $user->id ]) }}" method="post" enctype="multipart/form-data"> --}}
+                <form action="{{ route('post.store', ['user_id' => $user->id ]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mb-3" style="font-size: 1.5rem; width: 500px;">
                         <label for="title">タイトル</label>
@@ -26,7 +26,7 @@
                     <div class="mb-4 text-center">
                         <button type="submit" class="btn btn-primary btn-block" style="font-size: 1.5rem; width: 150px;">投稿する</button>
                     </div>
-                {{-- </form> --}}
+                </form>
             </div>
         </div>
     </div>

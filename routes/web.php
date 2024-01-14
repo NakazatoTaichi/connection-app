@@ -49,4 +49,5 @@ Route::middleware('auth')->group(function () {
     //投稿機能関係
     Route::get('/posts', [PostController::class, 'index'])->name('post.index');
     Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('post.store');
 });
