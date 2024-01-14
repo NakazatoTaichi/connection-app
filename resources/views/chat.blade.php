@@ -113,10 +113,7 @@
             var timestamp = new Date(data.chat.created_at);
             var formattedTimestamp = timestamp.toLocaleTimeString('ja-JP', { hour: 'numeric', minute: 'numeric' });
 
-            var formattedTimestamp = moment(data.chat.created_at).format('HH:mm');
-
             timestampDiv.innerHTML = formattedTimestamp;
-            // timestampDiv.innerHTML = data.chat.created_at;
 
             newMessageContainer.appendChild(messageDiv);
             newMessageContainer.appendChild(timestampDiv);
