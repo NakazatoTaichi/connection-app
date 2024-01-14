@@ -1,9 +1,19 @@
-@extends('layouts.layout');
+@extends('layouts.subLayout')
 
-@section('title','チャット画面')
+@section('title', 'チャット画面')
 
 @section('main')
-<div class="container mt-5">
+<div class="container" style="padding: 20px;">
+    <div class="sender py-3 row" style="font-size: 1.5rem;">
+        <div class="col-2">
+            <a style="text-decoration:none;" href="{{ route('user.index') }}">
+                戻る
+            </a>
+        </div>
+        <div class="col-8 text-center">
+            <b>{{ $user->name }}</b>
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="overflow-scroll" style="height: 500px;">
@@ -33,7 +43,9 @@
     </div>
 </div>
     <style>
-        /* 追加のスタイル設定 */
+        .main {
+            background-color: #d5f0d4;
+        }
         .message-container {
             margin-bottom: 10px;
         }
@@ -57,7 +69,6 @@
             word-wrap: break-word;
             margin-left: auto;
             font-size: 24px;
-            /* direction: rtl; */
             text-align: left;
         }
         .timestamp {

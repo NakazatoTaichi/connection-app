@@ -1,10 +1,10 @@
-@extends('layouts.layout');
+@extends('layouts.layout')
 
 @section('title','ユーザ一覧')
 
 @section('main')
 <div class="container">
-    <h1>ユーザ一覧</h1>
+    <h1 class="pt-2">ユーザ一覧</h1>
     @foreach ($users as $user)
     <div class="user-wrapper mb-4 border p-3">
         <div class="user-container row align-items-center mb-4">

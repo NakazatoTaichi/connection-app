@@ -22,6 +22,7 @@ class UserController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
+            'user_friend_id' => mt_rand(10000000, 99999999),
         ]);
 
         if ($request->hasFile('icon')) {

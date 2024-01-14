@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\FriendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,21 +20,29 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', [\App\Http\Controllers\UserController::class, 'showRegister'])->name('register');
-Route::post('/register', [\App\Http\Controllers\UserController::class, 'register']);
+Route::get('/register', [UserController::class, 'showRegister'])->name('register');
+Route::post('/register', [UserController::class, 'register']);
 
-Route::get('/login', [\App\Http\Controllers\UserController::class, 'showLogin']);
-Route::post('/login', [\App\Http\Controllers\UserController::class, 'login'])->name('login');
+Route::get('/login', [UserController::class, 'showLogin']);
+Route::post('/login', [UserController::class, 'login'])->name('login');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [\App\Http\Controllers\UserController::class, 'home'])->name('home');
+    Route::get('/home', [UserController::class, 'home'])->name('home');
 
-    Route::get('/myProfile', [\App\Http\Controllers\UserController::class, 'myProfile'])->name('myProfile');
-    Route::post('/myProfile/{user}', [\App\Http\Controllers\UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::get('/myProfile', [UserController::class, 'myProfile'])->name('myProfile');
+    Route::post('/myProfile/{user}', [UserController::class, 'updateProfile'])->name('updateProfile');
 
-    Route::post('logout', [\App\Http\Controllers\UserController::class, 'logout'])->name('user.logout');
+    Route::post('logout', [UserController::class, 'logout'])->name('user.logout');
 
+    //チャット画面関係
     Route::get('/users', [ChatController::class, 'users'])->name('user.index');
     Route::get('/chat/{user}', [ChatController::class, 'show'])->name('chat.show');
     Route::post('/chat/send/{user}', [ChatController::class, 'send'])->name('chat.send');
+
+    //友だち登録関係
+    Route::get('/friends', [FriendController::class, 'index'])->name('friend.index');
+    Route::get('/friends/friendRegister', [FriendController::class, 'friendRegister'])->name('friend.friendRegister');
+    Route::post('/friends', [FriendController::class, 'store'])->name('friend.store');
+    Route::post('/friends/register', [FriendController::class, 'register'])->name('friend.register');
+
 });
