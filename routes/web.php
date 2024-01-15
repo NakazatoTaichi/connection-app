@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,4 +46,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/friends', [FriendController::class, 'store'])->name('friend.store');
     Route::post('/friends/register', [FriendController::class, 'register'])->name('friend.register');
 
+    //投稿機能関係
+    Route::get('/posts', [PostController::class, 'index'])->name('post.index');
+    Route::get('/posts/create', [PostController::class, 'create'])->name('post.create');
+    Route::post('/posts', [PostController::class, 'store'])->name('post.store');
 });
