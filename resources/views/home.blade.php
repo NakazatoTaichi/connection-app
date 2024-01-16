@@ -60,7 +60,7 @@
     }
     .friend-post {
         height: 350px;
-        width: 296px;
+        width: 286px;
         margin-right: 50px;
         border: 2px solid black;
         text-align: center;
