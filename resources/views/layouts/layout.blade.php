@@ -28,7 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="{{ route('home')}}">ホーム</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('user.index') }}">トーク</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('friend.index') }}">トーク</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('post.index') }}">投稿</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('myProfile') }}">マイページ</a></li>
                 </ul>

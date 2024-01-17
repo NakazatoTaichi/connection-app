@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Friend;
 use Illuminate\Support\Str;
 
 
@@ -40,8 +42,12 @@ class UserController extends Controller
     public function home()
     {
         $user = Auth::user();
+        $friend_users = Friend::where('user_id', $user->id)->get();
+        $friend_posts = Post::whereHas('user.friends', function ($query) use ($friend_users) {
+            $query->whereIn('user_id', $friend_users->pluck('friend_id'));
+        })->get();
 
-        return view('home', ['user' => $user]);
+        return view('home', compact('user', 'friend_posts'));
     }
 
     public function MyProfile()

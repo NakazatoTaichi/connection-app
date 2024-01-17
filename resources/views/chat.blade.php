@@ -6,7 +6,7 @@
 <div class="container" style="padding: 20px;">
     <div class="sender py-3 row" style="font-size: 1.5rem;">
         <div class="col-2">
-            <a style="text-decoration:none;" href="{{ route('user.index') }}">
+            <a style="text-decoration:none;" href="{{ route('friend.index') }}">
                 戻る
             </a>
         </div>
