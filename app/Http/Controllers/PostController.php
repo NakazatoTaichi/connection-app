@@ -40,4 +40,10 @@ class PostController extends Controller
 
         return redirect()->route('post.index', compact('post'));
     }
+
+    public function show(Post $post)
+    {
+        return view('posts.show', compact('post'));
+    }
+
 }
