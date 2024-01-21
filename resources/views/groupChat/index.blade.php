@@ -13,11 +13,11 @@
         <div class="group-wrapper mb-4 border border-dark-subtle rounded-3 p-3">
             <div class="friend-container row align-items-center">
                 <div class="col-md-1">
-                    {{-- @if ($friend->icon)
-                    <img src="{{ asset('storage/icons/' . $friend->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                    @if ($group->group_icon)
+                    <img src="{{ asset('storage/group_icons/' . $group->group_icon )}}" alt="group_icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                     @else
-                    <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
-                    @endif --}}
+                    <div class="group_icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                    @endif
                 </div>
                 <div class="group col-md-3">
                     <a href="">{{-- {{ route('chat.show', ['user' => $friend->id]) }}--}}
@@ -27,7 +27,7 @@
             </div>
         </div>
         @empty
-            <p>作成されたグルーはありません</p>
+            <p>作成されたグループはありません</p>
         @endforelse
     </div>
 </div>
