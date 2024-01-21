@@ -6,7 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
-
+use App\Http\Controllers\GroupChatController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -54,4 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 
     Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
+
+    //グループチャット画面関係
+    Route::get('/groupChat', [GroupChatController::class, 'index'])->name('groupChat.index');
 });
