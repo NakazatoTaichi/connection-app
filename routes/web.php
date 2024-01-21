@@ -58,4 +58,5 @@ Route::middleware('auth')->group(function () {
     //グループチャット画面関係
     Route::get('/groupChat', [GroupChatController::class, 'index'])->name('groupChat.index');
     Route::get('/groupChat/create', [GroupChatController::class, 'create'])->name('groupChat.create');
+    Route::post('groupChat', [GroupChatController::class, 'store'])->name('groupChat.store');
 });
