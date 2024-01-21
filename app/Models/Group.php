@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Group extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['group_name'];
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function groupMessages()
+    {
+        return $this->hasMany(GroupMessage::class);
+    }
 }
