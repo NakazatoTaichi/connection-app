@@ -8,13 +8,14 @@
     "devDependencies": {
         "axios": "^1.6.1",
         "laravel-vite-plugin": "^0.8.0",
-        "vite": "^4.0.0",
+        "vite": ">=4.5.2",
         "follow-redirects": ">=1.15.4"
     },
     "dependencies": {
         "laravel-echo": "^1.15.3",
         "moment": "^2.30.1",
         "pusher-js": "^8.4.0-rc2",
-        "follow-redirects": ">=1.15.4"
+        "follow-redirects": ">=1.15.4",
+        "vite": ">=4.5.2"
     }
 }
