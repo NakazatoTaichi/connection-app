@@ -11,5 +11,8 @@ class GroupChatController extends Controller
         return view('groupChat.index');
     }
 
-    
+    public function create()
+    {
+        return view('groupChat.create');
+    }
 }

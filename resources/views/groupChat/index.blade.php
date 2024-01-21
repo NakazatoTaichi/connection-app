@@ -1,12 +1,12 @@
-@extends('layouts.subLayout')
+@extends('layouts.layout')
 
 @section('title', 'グループ一覧')
 
 @section('main')
-<div class="container mt-5">
+<div class="container pt-3">
     <h1>グループ一覧画面</h1>
     <div class="my-4">
-        <a class="btn btn-primary" href="{{route('groupchat.create')}}">グループを作成</a>
+        <a class="btn btn-primary" href="{{route('groupChat.create')}}">グループを作成</a>
     </div>
     <div class="group-list">
         {{-- @foreach($posts as $post)
