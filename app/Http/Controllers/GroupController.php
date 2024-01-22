@@ -39,4 +39,9 @@ class GroupController extends Controller
 
         return redirect()->route('group.index', compact('group'));
     }
+
+    public function show(Group $group)
+    {
+        return view('groups.show', compact('group'));
+    }
 }

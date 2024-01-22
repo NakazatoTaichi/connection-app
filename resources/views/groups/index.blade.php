@@ -20,9 +20,9 @@
                     @endif
                 </div>
                 <div class="group col-md-3">
-                    {{-- <a href="{{ route('group.show', ['user' => $friend->id]) }}"> --}}
+                    <a href="{{ route('group.show', ['group' => $group->id]) }}">
                         <p style="margin: 0;">{{$group->group_name}}</p>
-                    {{-- </a> --}}
+                    </a>
                 </div>
             </div>
         </div>

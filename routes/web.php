@@ -60,5 +60,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/groups', [GroupController::class, 'index'])->name('group.index');
     Route::get('/groups/create', [GroupController::class, 'create'])->name('group.create');
     Route::post('groups', [GroupController::class, 'store'])->name('group.store');
-    // Route::get('/groupChat/{group}', [GroupChatController::class, 'show'])->name('groupChat.show');
+    Route::get('/groups/{group}', [GroupController::class, 'show'])->name('group.show');
 });
