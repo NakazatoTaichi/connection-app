@@ -9,6 +9,7 @@ use App\Models\GroupMessage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Events\GroupMessageSent;
 
 
 
@@ -41,5 +42,24 @@ class GroupChatController extends Controller
         })->get();
 
         return view('groupChat.groupShow', compact('user', 'group', 'group_users', 'messages'));
+    }
+
+    public function groupMessageSend(Request $request, Group $group)
+    {
+        $request->validate([
+            'message' => ['required', 'string']
+        ]);
+
+        $user = Auth::user();
+
+        $message = new GroupMessage;
+        $message->message = $request->message;
+        $message->user_id = $user->id;
+        $message->group_id = $group->id;
+        $message->save();
+
+        event(new GroupMessageSent($message));
+
+        return back();
     }
 }

@@ -64,4 +64,5 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/groupChat/participate', [GroupChatController::class, 'participate'])->name('groupChat.participate');
     Route::get('/groupChat/{group}', [GroupChatController::class, 'groupShow'])->name('groupChat.groupShow');
+    Route::post('/groupChat/groupMessageSend/{group}', [GroupChatController::class, 'groupMessageSend'])->name('groupChat.groupMessageSend');
 });

@@ -1,6 +1,6 @@
 @extends('layouts.subLayout')
 
-@section('title', 'チャット画面')
+@section('title', 'グループチャット画面')
 
 @section('main')
 <div class="container" style="padding: 20px;">
@@ -21,7 +21,7 @@
                     <div id="chat-area">
                         @foreach ($messages as $message)
                             <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
-                                <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
+                                <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'group-member-message' }}">
                                     {{ $message->message }}
                                 </div>
                                 <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="fixed-bottom-input">
-        <form id="chat-form" method="POST" action="{{ route('chat.send', $user) }}">
+        <form id="chat-form" method="POST" action="{{ route('groupChat.groupMessageSend', $group) }}">
             @csrf
             <div class="input-group">
                 <input type="text" name="message" class="form-control" placeholder="メッセージを入力" aria-label="メッセージを入力" aria-describedby="button-send" style="min-height: 50px;">
@@ -49,7 +49,7 @@
         .message-container {
             margin-bottom: 10px;
         }
-        .received-message {
+        .group-member-message {
             background-color: #f0f0f0;
             border-radius: 10px;
             padding: 10px;
@@ -105,12 +105,12 @@
             newMessageContainer.className = 'message-container ' + (data.user_id === {{ auth()->user()->id }} ? 'text-end' : 'text-start');
 
             var messageDiv = document.createElement('div');
-            messageDiv.className = data.chat.user_id === {{ auth()->user()->id }} ? 'sent-message' : 'received-message';
-            messageDiv.innerHTML = data.chat.message;
+            messageDiv.className = data.message.user_id === {{ auth()->user()->id }} ? 'sent-message' : 'group-member-message';
+            messageDiv.innerHTML = data.message.message;
 
             var timestampDiv = document.createElement('div');
             timestampDiv.className = 'timestamp';
-            var timestamp = new Date(data.chat.created_at);
+            var timestamp = new Date(data.message.created_at);
             var formattedTimestamp = timestamp.toLocaleTimeString('ja-JP', { hour: 'numeric', minute: 'numeric' });
 
             timestampDiv.innerHTML = formattedTimestamp;
