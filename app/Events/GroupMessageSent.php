@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\Chat;
+use App\Models\GroupMessage;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,16 +11,15 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcast
+class GroupMessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $chat;
+    public $message;
 
-
-    public function __construct(Chat $chat)
+    public function __construct(GroupMessage $message)
     {
-        $this->chat = $chat;
+        $this->message = $message;
     }
 
     public function broadcastOn()

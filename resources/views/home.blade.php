@@ -39,6 +39,10 @@
             </div>
         @endforeach
     </div>
+    <h3 class="p-2" style="width: fit-content;"><b>グループ一覧</b></h3>
+    <div class="mt-3">
+        <a href="{{route('group.index')}}">一覧を見る</a>
+    </div>
 </div>
 @endsection
 
