@@ -8,7 +8,7 @@
         <div class="group-form">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <form action="{{ route('groupChat.store') }}" method="post" enctype="multipart/form-data">
+                    <form action="{{ route('group.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mb-3" style="font-size: 1.5rem;">
                             <label for="group_name">グループ名</label>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="my-3 text-end">
-            <a class="btn btn-primary" href="{{route('groupChat.index')}}">戻る</a>
+            <a class="btn btn-primary" href="{{route('group.index')}}">戻る</a>
         </div>
     </div>
 @endsection

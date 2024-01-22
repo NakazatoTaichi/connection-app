@@ -6,7 +6,7 @@
 <div class="container pt-3">
     <h1>グループ一覧画面</h1>
     <div class="my-4">
-        <a class="btn btn-primary" href="{{route('groupChat.create')}}">グループを作成</a>
+        <a class="btn btn-primary" href="{{route('group.create')}}">グループを作成</a>
     </div>
     <div class="group-list mt-2">
         @forelse ($groups as $group)
@@ -20,9 +20,9 @@
                     @endif
                 </div>
                 <div class="group col-md-3">
-                    <a href="">{{-- {{ route('chat.show', ['user' => $friend->id]) }}--}}
+                    {{-- <a href="{{ route('group.show', ['user' => $friend->id]) }}"> --}}
                         <p style="margin: 0;">{{$group->group_name}}</p>
-                    </a>
+                    {{-- </a> --}}
                 </div>
             </div>
         </div>
