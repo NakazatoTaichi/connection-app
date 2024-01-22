@@ -24,13 +24,18 @@
                                 <p>{{$group->group_description}}</p>
                             </div>
                         </div>
+                        @if ($group_user_exists)
                         <div class="col-md-6 mt-3 text-center">
-                            <p>参加する</p>
-                            {{-- <form action="{{route('friend.register', ['friend_id' => $friend_info->id])}}" method="post">
-                                @csrf
-                                <button>参加する</button>
-                            </form> --}}
+                            <a class="btn btn-success" href="{{route('groupChat.groupShow',['group' => $group->id])}}">トーク</a>
                         </div>
+                        @else
+                            <div class="col-md-6 mt-3 text-center">
+                                <form action="{{route('groupChat.participate', ['group_id' => $group->id])}}" method="post">
+                                    @csrf
+                                    <button class="btn btn-success">参加する</button>
+                                </form>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

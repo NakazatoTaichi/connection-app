@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Group;
+use App\Models\GroupUser;
 use App\Models\GroupMessage;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -13,24 +14,32 @@ use Illuminate\Support\Str;
 
 class GroupChatController extends Controller
 {
+    public function participate(Request $request)
+    {
+        $user = Auth::user();
 
+        $group_user = GroupUser::create([
+            'user_id' => $user->id,
+            'group_id' => $request['group_id'],
+        ]);
+        $group_user->save();
 
-    // public function show(Group $group)
-    // {
+        return redirect()->route('groupChat.groupShow', ['group' => $request['group_id']]);
+    }
 
-    // }
+    public function groupShow(Group $group)
+    {
+        $user = Auth::user();
+        $group_users = GroupUser::where('group_id', $group->id)->get();
 
-    // public function show(Group $group)
-    // {
-    //     $user = Auth::user();
-    //     $user = User::find($user->id);
+        $group_user_ids = $group_users->pluck('user_id');
 
-    //     $messages = GroupMessage::where(function ($query) use ($user) {
-    //         $query->where('user_id', Auth::id())->where('recipient_id', $user->id);
-    //     })->orWhere(function ($query) use ($user) {
-    //         $query->where('user_id', $user->id)->where('recipient_id', Auth::id());
-    //     })->get();
+        $messages = GroupMessage::where(function ($query) use ($group) {
+            $query->where('user_id', Auth::id())->where('group_id', $group->id);
+        })->orWhere(function ($query) use ($group, $group_user_ids) {
+            $query->whereIn('user_id', $group_user_ids)->where('group_id', $group->id);
+        })->get();
 
-    //     return view('chat', compact('user', 'messages'));
-    // }
+        return view('groupChat.groupShow', compact('user', 'group', 'group_users', 'messages'));
+    }
 }

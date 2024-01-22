@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Models\GroupMessage;
 use App\Models\User;
+use App\Models\GroupUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
@@ -42,6 +43,9 @@ class GroupController extends Controller
 
     public function show(Group $group)
     {
-        return view('groups.show', compact('group'));
+        $user = Auth::user();
+        $group_user_exists = GroupUser::where('group_id', $group->id)->where('user_id', $user->id)->exists();
+
+        return view('groups.show', compact('group', 'group_user_exists'));
     }
 }
