@@ -34,26 +34,22 @@
                     <li class="nav-item"><a class="nav-link" href="{{ route('myProfile') }}">マイページ</a></li>
                 </ul>
                 <div class="dropdown">
-                    @if (\Illuminate\Support\Facades\Auth::user()->icon)
-                        <img src="{{ asset('storage/icons/' . \Illuminate\Support\Facades\Auth::user()->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
-                    @elseif (\Illuminate\Support\Facades\Auth::user()->icon->null)
-                        <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
-                    @else
-                        <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
-                    @endif
-                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        ログイン者：{{\Illuminate\Support\Facades\Auth::user()->name}}
+                    <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:1.5rem;">
+                        @if (\Illuminate\Support\Facades\Auth::user()->icon)
+                            <img src="{{ asset('storage/icons/' . \Illuminate\Support\Facades\Auth::user()->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                        @elseif (\Illuminate\Support\Facades\Auth::user()->icon->null)
+                            <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                        @else
+                            <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                        @endif
+                        {{\Illuminate\Support\Facades\Auth::user()->name}}
                     </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <form action="{{route('user.logout')}}" method="post">
-                                <button type="submit" class="dropdown-item">
-                                    @csrf
-                                    ログアウト
-                                </button>
-                            </form>
-                        </li>
-                    </ul>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <form action="{{route('user.logout')}}" method="post" style="display: inline-block; margin: 0;">
+                            @csrf
+                            <button type="submit" class="dropdown-item" style="font-size:1.5rem;">ログアウト</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -64,7 +60,6 @@
 <style>
 .navbar {
     background-color: #333;
-    overflow: hidden;
     position: fixed;
     text-align: center;
     width: 100%;
@@ -86,7 +81,6 @@
 }
 
 .nav-link {
-    /* display: block; */
     color: white;
     width: 150px;
     margin-left: 20px;
@@ -102,8 +96,8 @@
 }
 
 .dropdown {
-    margin-left: auto !important;
-    padding-right: 30px;
+    margin-left: auto;
+    padding-right: 50px;
 }
 
 .dropdown-toggle {
@@ -112,6 +106,7 @@
 
 .dropdown-item {
     background-color: #ddd;
+    margin-left:2px;
 }
 
 .main {
