@@ -1,10 +1,12 @@
-@extends('layouts.layout')
+@extends('layouts.talkLayout')
 
-@section('title', 'グループ詳細')
+@section('title', 'グループ詳細画面')
 
 @section('main')
-<div class="container pt-3">
-    <h1>グループ詳細画面</h1>
+<div class="container mt-5 w-75 p-3" style="margin: auto;">
+    <div class="d-flex justify-content-center">
+        <h1 class="mt-3" style="margin-bottom: 0;">グループ詳細</h1>
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="group-detail mt-2">
