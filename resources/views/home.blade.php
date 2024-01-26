@@ -40,8 +40,28 @@
         @endforeach
     </div>
     <h3 class="p-2" style="width: fit-content;"><b>グループ一覧</b></h3>
-    <div class="mt-3">
-        <a href="{{route('group.index')}}">一覧を見る</a>
+    <div class="group-chats-list my-4 d-flex align-items-center">
+        @foreach($public_groups as $public_group)
+        <div class="group-chat" style="margin-right: 10px; border: 2px solid black;">
+            <a href="{{ route('group.show', ['group' => $public_group->id]) }}">
+                <div class="group-chat-name text-center">
+                    <p class="p-3" style="margin: 0; font-size: 1.25rem;">{{$public_group->group_name}}</p>
+                </div>
+                <div class="group-chat-main d-flex flex-column">
+                    <div class="group-icon m-auto">
+                        @if ($public_group->group_icon)
+                            <img src="{{ asset('storage/group_icons/' . $public_group->group_icon )}}" alt="icon" class="img-fluid rounded-circle border border-3">
+                        @elseif ($public_group->group_icon->null)
+                            <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div>
+                        @else
+                            <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div>
+                        @endif
+                    </div>
+                    <p class="text-center" style="margin: 0; font-size: 1.25rem;">メンバー{{$public_group->groupMemberCount($public_group->id)}}人</p>
+                </div>
+            </a>
+        </div>
+        @endforeach
     </div>
 </div>
 @endsection
@@ -119,5 +139,32 @@
         background-color: #00FFCC;
         color: white;
         border: 2px solid #00FFCC;
+    }
+
+    .group-chats-list {
+    overflow-x: auto;
+    white-space: nowrap;
+    }
+
+    .group-chats-list::-webkit-scrollbar {
+        display: none;
+    }
+    .group-chat {
+        height: 200px;
+        width: 250px;
+        border-radius: 50px;
+        display: inline-block;
+        white-space: normal;
+        flex-shrink: 0;
+    }
+
+    .group-chat a {
+        color: black;
+    }
+
+    .group-icon img {
+        height: 80px;
+        width: 80px;
+        border-radius: 50%;
     }
     </style>

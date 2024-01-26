@@ -36,15 +36,15 @@ class FriendController extends Controller
         $friend_info = User::where('user_friend_id', $friend_id)->first();
 
         if ($friend_info && $friend_info->user_friend_id === $user->user_friend_id) {
-            // ユーザが自分のフレンドIDを入力した場合
+            // ユーザーが自分のフレンドIDを入力した場合
             $friend_info_message = 'あなたのフレンドIDです';
             return view('friends.friendRegister', compact('user', 'friend_info_message'));
         } elseif ($friend_info && Friend::isFriendIdExists($user, $friend_info)) {
-            // ユーザがすでに友だちだった場合の処理
+            // ユーザーがすでに友だちだった場合の処理
             $friend_info_message = 'すでに友だちです';
             return view('friends.friendRegister', compact('user', 'friend_info_message'));
         } elseif ($friend_info) {
-            //友だち登録されていないユーザの場合
+            //友だち登録されていないユーザーの場合
             return view('friends.friendRegister', compact('user', 'friend_info'));
         } else {
             // 存在しないフレンドIDが入力された場合の処理
