@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Post;
 use App\Models\Friend;
+use App\Models\Group;
 use Illuminate\Support\Str;
 
 
@@ -46,8 +47,9 @@ class UserController extends Controller
         $friend_posts = Post::whereHas('user.friends', function ($query) use ($friend_users) {
             $query->whereIn('user_id', $friend_users->pluck('friend_id'));
         })->get();
+        $public_groups = Group::all();
 
-        return view('home', compact('user', 'friend_posts'));
+        return view('home', compact('user', 'friend_posts', 'public_groups'));
     }
 
     public function MyProfile()
