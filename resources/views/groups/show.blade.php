@@ -27,7 +27,6 @@
                         </div>
                         @if ($group_user_exists)
                             <div class="col-md-6 text-center">
-                                {{-- <a class="btn btn-success" href="{{route('groupChat.groupShow',['group' => $group->id])}}">トーク</a> --}}
                                 <a href="{{ route('groupChat.groupShow',['group' => $group->id]) }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-wechat" viewBox="0 0 16 16">
                                         <path d="M11.176 14.429c-2.665 0-4.826-1.8-4.826-4.018 0-2.22 2.159-4.02 4.824-4.02S16 8.191 16 10.411c0 1.21-.65 2.301-1.666 3.036a.324.324 0 0 0-.12.366l.218.81a.616.616 0 0 1 .029.117.166.166 0 0 1-.162.162.177.177 0 0 1-.092-.03l-1.057-.61a.519.519 0 0 0-.256-.074.509.509 0 0 0-.142.021 5.668 5.668 0 0 1-1.576.22ZM9.064 9.542a.647.647 0 1 0 .557-1 .645.645 0 0 0-.646.647.615.615 0 0 0 .09.353Zm3.232.001a.646.646 0 1 0 .546-1 .645.645 0 0 0-.644.644.627.627 0 0 0 .098.356Z"/>
@@ -48,7 +47,6 @@
                             <div class="col-md-6 text-center">
                                 <form action="{{route('groupChat.participate', ['group_id' => $group->id])}}" method="post">
                                     @csrf
-                                    {{-- <button class="btn btn-success">参加する</button> --}}
                                     <button class="btn btn-success">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-fill-up" viewBox="0 0 16 16">
                                             <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.354-5.854 1.5 1.5a.5.5 0 0 1-.708.708L13 11.707V14.5a.5.5 0 0 1-1 0v-2.793l-.646.647a.5.5 0 0 1-.708-.708l1.5-1.5a.5.5 0 0 1 .708 0ZM11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
