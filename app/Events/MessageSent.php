@@ -16,11 +16,12 @@ class MessageSent implements ShouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $chat;
+    public $user;
 
-
-    public function __construct(Chat $chat)
+    public function __construct(Chat $chat, $user)
     {
         $this->chat = $chat;
+        $this->user = $user;
     }
 
     public function broadcastOn()

@@ -20,12 +20,24 @@
                 <div id="scroll-inner">
                     <div id="chat-area">
                         @foreach ($messages as $message)
-                            <div class="message-container {{ $message->user_id === auth()->user()->id ? 'text-end' : 'text-start' }}">
-                                <div class="{{ $message->user_id === auth()->user()->id ? 'sent-message' : 'received-message' }}">
-                                    {{ $message->message }}
+                            @if ($message->user_id === auth()->user()->id)
+                                <div class="message-container d-flex justify-content-end text-end">
+                                    <div class="timestamp align-self-end" style="margin-right: 5px;">
+                                        {{ $message->created_at->format('G:i') }}
+                                    </div>
+                                    <div class="sent-message">{{ $message->message }}</div>
                                 </div>
-                                <div class="timestamp">{{ $message->created_at->format('G:i') }}</div>
-                            </div>
+                            @else
+                                <div class="message-container d-flex justify-content-start text-start">
+                                    <div class="align-self-start">
+                                        <img src="{{ asset('storage/icons/' . $user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px; margin-right: 5px;">
+                                    </div>
+                                    <div class="received-message">{{ $message->message }}</div>
+                                    <div class="timestamp align-self-end" style="margin-left: 5px;">
+                                        {{ $message->created_at->format('G:i') }}
+                                    </div>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -47,7 +59,7 @@
             background-color: #d5f0d4;
         }
         .message-container {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         .received-message {
             background-color: #f0f0f0;
@@ -67,7 +79,6 @@
             width: fit-content;
             max-width: 50%;
             word-wrap: break-word;
-            margin-left: auto;
             font-size: 24px;
             text-align: left;
         }
@@ -100,20 +111,30 @@
 
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
-
             var newMessageContainer = document.createElement('div');
-            newMessageContainer.className = 'message-container ' + (data.user_id === {{ auth()->user()->id }} ? 'text-end' : 'text-start');
-
-            var messageDiv = document.createElement('div');
-            messageDiv.className = data.chat.user_id === {{ auth()->user()->id }} ? 'sent-message' : 'received-message';
-            messageDiv.innerHTML = data.chat.message;
+            var messageClass = data.user_id === {{ auth()->user()->id }} ? 'd-flex justify-content-end text-end' : 'd-flex justify-content-start text-start';
+            newMessageContainer.className = 'message-container ' + messageClass;
 
             var timestampDiv = document.createElement('div');
-            timestampDiv.className = 'timestamp';
+            timestampDiv.className = 'timestamp align-self-end';
             var timestamp = new Date(data.chat.created_at);
             var formattedTimestamp = timestamp.toLocaleTimeString('ja-JP', { hour: 'numeric', minute: 'numeric' });
-
             timestampDiv.innerHTML = formattedTimestamp;
+
+            var messageDiv = document.createElement('div');
+            messageDiv.className = data.user_id === {{ auth()->user()->id }} ? 'sent-message' : 'received-message';
+            messageDiv.innerHTML = data.chat.message;
+
+            if (data.user_id !== {{ auth()->user()->id }}) {
+                var iconDiv = document.createElement('div');
+                var iconImg = document.createElement('img');
+                iconImg.src = '/storage/icons/' + data.user.icon;
+                iconImg.alt = "icon";
+                iconImg.className = "img-fluid rounded-circle";
+                iconImg.style = "width: 50px; height: 50px; margin-right: 5px;";
+                iconDiv.appendChild(iconImg);
+                newMessageContainer.appendChild(iconDiv);
+            }
 
             newMessageContainer.appendChild(messageDiv);
             newMessageContainer.appendChild(timestampDiv);
