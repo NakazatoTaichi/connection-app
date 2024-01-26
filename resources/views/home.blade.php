@@ -12,9 +12,9 @@
                     @if ($friend_post->user->icon)
                         <img src="{{ asset('storage/icons/' . $friend_post->user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 35px; height: 35px;">
                     @elseif ($friend_post->user->icon->null)
-                        <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                        <div class="icon-placeholder rounded-circle" style="width: 35px; height: 35px; background-color: #CCCCCC;"></div>
                     @else
-                        <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                        <div class="icon-placeholder rounded-circle" style="width: 35px; height: 35px; background-color: #CCCCCC;"></div>
                     @endif
                     <p>{{$friend_post->user->name}}</p>
                 </div>
