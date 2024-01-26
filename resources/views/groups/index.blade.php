@@ -1,6 +1,6 @@
 @extends('layouts.talkLayout')
 
-@section('title', 'グループ一覧画面')
+@section('title', 'グループリスト画面')
 
 @section('main')
 <div class="container mt-5 w-75 p-3" style="margin: auto;">
@@ -9,7 +9,7 @@
             <h1 class="mt-3" style="margin-bottom: 0;">グループリスト</h1>
         </div>
         <div class="col-md-3">
-            <p style="margin: 0;">(グループ数：{{$groups->count()}} )</p>
+            <p style="margin: 0;">(グループ数：{{$participated_groups->count()}} )</p>
         </div>
     </div>
     <div class="my-3 d-flex align-items-center">
@@ -22,19 +22,19 @@
         </a>
     </div>
     <div class="group-list py-3 overflow-scroll" style="height: 550px;">
-        @forelse ($groups as $group)
+        @forelse ($participated_groups as $participated_group)
         <div class="group-wrapper mb-4 border border-dark-subtle rounded-5 p-3">
             <div class="friend-container row align-items-center">
                 <div class="col-md-1">
-                    @if ($group->group_icon)
-                    <img src="{{ asset('storage/group_icons/' . $group->group_icon )}}" alt="group_icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
+                    @if ($participated_group->group_icon)
+                    <img src="{{ asset('storage/group_icons/' . $participated_group->group_icon )}}" alt="group_icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
                     @else
                     <div class="group_icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
                     @endif
                 </div>
                 <div class="group col-md-3">
-                    <a href="{{ route('group.show', ['group' => $group->id]) }}">
-                        <p style="margin: 0;">{{$group->group_name}}</p>
+                    <a href="{{ route('groupChat.groupShow',['group' => $participated_group->id]) }}">
+                        <p style="margin: 0;">{{$participated_group->group_name}}</p>
                     </a>
                 </div>
             </div>

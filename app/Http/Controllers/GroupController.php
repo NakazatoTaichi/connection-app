@@ -14,9 +14,12 @@ class GroupController extends Controller
 {
     public function index()
     {
-        $groups = Group::all();
+        $user = Auth::user();
+        $participated_groups = Group::whereHas('users', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
 
-        return view('groups.index', compact('groups'));
+        return view('groups.index', compact('participated_groups'));
     }
 
     public function create()
