@@ -58,7 +58,7 @@ class GroupChatController extends Controller
         $message->group_id = $group->id;
         $message->save();
 
-        event(new GroupMessageSent($message));
+        event(new GroupMessageSent($message, $user));
 
         return back();
     }

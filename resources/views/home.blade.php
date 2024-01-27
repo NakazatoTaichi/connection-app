@@ -11,10 +11,8 @@
                 <div class="post-header d-flex align-items-center">
                     @if ($friend_post->user->icon)
                         <img src="{{ asset('storage/icons/' . $friend_post->user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 35px; height: 35px;">
-                    @elseif ($friend_post->user->icon->null)
-                        <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
                     @else
-                        <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                        <div class="icon-placeholder rounded-circle m-1" style="width: 35px; height: 35px; background-color: #CCCCCC;"></div>
                     @endif
                     <p>{{$friend_post->user->name}}</p>
                 </div>
@@ -22,7 +20,7 @@
                     @if ($friend_post->image)
                     <img src="{{ asset('storage/images/' . $friend_post->image )}}" alt="image" class="img-fluid">
                     @else
-                    <div class="image-placeholder" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                    <div class="image-placeholder mx-auto" style="width: 250px; height: 150px; background-color: #CCCCCC; margin: 25px 0;"></div>
                     @endif
                     <p>{{$friend_post->title}}</p>
                 </div>

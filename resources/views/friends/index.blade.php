@@ -40,7 +40,7 @@
             </div>
         </div>
         @empty
-            <p>友だちはいません</p>
+            <p>登録されている友だちはいません</p>
         @endforelse
     </div>
 </div>

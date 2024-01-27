@@ -40,7 +40,7 @@
             </div>
         </div>
         @empty
-            <p>作成されたグループはありません</p>
+            <p>参加しているグループはありません</p>
         @endforelse
     </div>
 </div>

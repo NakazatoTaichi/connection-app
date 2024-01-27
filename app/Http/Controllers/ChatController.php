@@ -33,13 +33,14 @@ class ChatController extends Controller
             'message' => ['required', 'string']
         ]);
 
+        $self_user = User::find(Auth::id());
         $message = new Chat;
         $message->message = $request->message;
-        $message->user_id = Auth::id();
+        $message->user_id = $self_user->id;
         $message->recipient_id = $user->id;
         $message->save();
 
-        event(new MessageSent($message));
+        event(new MessageSent($message, $self_user));
 
         return back();
     }
