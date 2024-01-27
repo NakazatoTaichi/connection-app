@@ -16,9 +16,9 @@
                 </div>
                 <div class="post-main">
                     @if ($post->image)
-                    <img src="{{ asset('storage/images/' . $post->image )}}" alt="image" class="img-fluid">
+                        <img src="{{ asset('storage/images/' . $post->image )}}" alt="image" class="img-fluid">
                     @else
-                    <div class="image-placeholder" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                        <div class="image-placeholder mx-auto" style="width: 250px; height: 150px; background-color: #CCCCCC; margin: 25px 0;"></div>
                     @endif
                     <p>{{$post->title}}</p>
                 </div>
