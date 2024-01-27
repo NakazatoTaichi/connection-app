@@ -3,10 +3,10 @@
 @section('title', 'チャット画面')
 
 @section('main')
-<div class="container" style="padding: 20px;">
-    <div class="sender py-3 row" style="font-size: 1.5rem;">
+<div class="header bg-success bg-gradient" style="z-index: 10;">
+    <div class="sender p-4 row" style="font-size: 1.5rem;">
         <div class="col-2">
-            <a style="text-decoration:none;" href="{{ route('friend.index') }}">
+            <a style="text-decoration:none; color:black;" href="{{ route('friend.index') }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
                 </svg>
@@ -16,9 +16,11 @@
             <b>{{ $user->name }}</b>
         </div>
     </div>
-    <div class="card">
+</div>
+<div class="container">
+    <div class="card border border-dark" style="padding-top: 84px;">
         <div class="card-body">
-            <div class="overflow-scroll" style="height: 500px;">
+            <div class="overflow-scroll" style="height: 68vh">
                 <div id="scroll-inner">
                     <div id="chat-area">
                         @foreach ($messages as $message)
@@ -46,19 +48,30 @@
             </div>
         </div>
     </div>
-    <div class="fixed-bottom-input">
+    <div class="fixed-bottom-input border border-2 border-dark-subtle rounded-5" style="z-index: 10; background-color: #f0f8ff;">
         <form id="chat-form" method="POST" action="{{ route('chat.send', $user) }}">
             @csrf
-            <div class="input-group">
-                <input type="text" name="message" class="form-control" placeholder="メッセージを入力" aria-label="メッセージを入力" aria-describedby="button-send" style="min-height: 50px;">
-                <button class="btn btn-primary" type="submit" id="button-send">送信</button>
+            <div class="input-group p-5">
+                <input type="text" name="message" class="form-control border border-2 border-dark-subtle" placeholder="メッセージを入力" aria-label="メッセージを入力" aria-describedby="button-send" style="min-height: 50px;">
+                <button class="btn btn-primary" type="submit" id="button-send">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="25" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                        <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                    </svg>
+                </button>
             </div>
         </form>
     </div>
 </div>
     <style>
-        .main {
-            background-color: #d5f0d4;
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .card {
+            scroll-padding-bottom: 146px;
         }
         .message-container {
             margin-bottom: 15px;
@@ -90,12 +103,8 @@
         .fixed-bottom-input {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 40px;
-            margin-bottom: 20px;
-            background-color: #fff;
-            border-top: 1px solid #ddd;
+            left: 70px;
+            right: 70px;
         }
     </style>
     <script>
@@ -138,8 +147,15 @@
                 newMessageContainer.appendChild(iconDiv);
             }
 
-            newMessageContainer.appendChild(messageDiv);
-            newMessageContainer.appendChild(timestampDiv);
+            if (data.user_id !== {{ auth()->user()->id }}) {
+                timestampDiv.style = "margin-left: 5px;";
+                newMessageContainer.appendChild(messageDiv);
+                newMessageContainer.appendChild(timestampDiv);
+            } else {
+                timestampDiv.style = "margin-right: 5px;";
+                newMessageContainer.appendChild(messageDiv);
+                newMessageContainer.appendChild(timestampDiv);
+            }
 
             document.getElementById('chat-area').appendChild(newMessageContainer);
 
