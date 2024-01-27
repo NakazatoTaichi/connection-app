@@ -37,12 +37,13 @@
                     <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:1.5rem;">
                         @if (\Illuminate\Support\Facades\Auth::user()->icon)
                             <img src="{{ asset('storage/icons/' . \Illuminate\Support\Facades\Auth::user()->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px;">
-                        @elseif (\Illuminate\Support\Facades\Auth::user()->icon->null)
-                            <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                            {{\Illuminate\Support\Facades\Auth::user()->name}}
                         @else
-                            <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                            <div class="d-flex align-items-center">
+                                <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC;"></div>
+                                <p style="margin-left: 10px; margin-bottom: 0;">{{\Illuminate\Support\Facades\Auth::user()->name}}</p>
+                            </div>
                         @endif
-                        {{\Illuminate\Support\Facades\Auth::user()->name}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <form action="{{route('user.logout')}}" method="post" style="display: inline-block; margin: 0;">
