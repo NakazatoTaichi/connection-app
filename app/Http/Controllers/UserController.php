@@ -46,7 +46,7 @@ class UserController extends Controller
         $friend_users = Friend::where('user_id', $user->id)->get();
         $friend_posts = Post::whereHas('user.friends', function ($query) use ($friend_users) {
             $query->whereIn('user_id', $friend_users->pluck('friend_id'));
-        })->get();
+        })->latest()->get();
         $public_groups = Group::all();
 
         return view('home', compact('user', 'friend_posts', 'public_groups'));
