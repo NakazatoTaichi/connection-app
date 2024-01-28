@@ -13,9 +13,9 @@
             </div>
             <div class="posted_screen p-3">
                 @if ($post->image)
-                <img src="{{ asset('storage/images/' . $post->image )}}" class="mx-auto" style="width: 500px; height: 300px;" alt="image" class="img-fluid">
+                    <img src="{{ asset('storage/images/' . $post->image )}}" class="mx-auto" style="width: 500px; height: 300px;" alt="image" class="img-fluid">
                 @else
-                <div class="image-placeholder" style="background-color: #CCCCCC;"></div>
+                    <div class="image-placeholder mx-auto" style="background-color: #CCCCCC; width: 500px; height: 300px;"></div>
                 @endif
             </div>
             <div class="post-content m-3">
@@ -105,5 +105,4 @@
         outline: none;
         background: transparent;
     }
-
 </style>
