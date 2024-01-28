@@ -7,14 +7,17 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     public function index()
     {
+        $user = Auth::user();
         $posts = Post::all();
-        return view('posts.index', compact('posts'));
+
+        return view('posts.index', compact('user', 'posts'));
     }
 
     public function create()
@@ -45,7 +48,10 @@ class PostController extends Controller
     public function show(Post $post)
     {
         $comments = Comment::where('post_id', $post->id)->latest()->get();
-        return view('posts.show', compact('post', 'comments'));
-    }
 
+        $user = Auth::user();
+        $likes = Like::where('post_id', $post->id)->where('user_id', $user->id)->first();
+
+        return view('posts.show', compact('post', 'comments', 'likes'));
+    }
 }
