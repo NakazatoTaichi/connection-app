@@ -29,6 +29,7 @@ class GroupController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
         $group = Group::create([
             'group_name' => $request['group_name'],
             'group_description' => $request['group_description'],
@@ -40,6 +41,11 @@ class GroupController extends Controller
             $group->group_icon = $group_iconName;
             $group->save();
         }
+
+        $group_user = GroupUser::create([
+            'group_id' => $group->id,
+            'user_id' => $user->id,
+        ]);
 
         return redirect()->route('group.index', compact('group'));
     }
