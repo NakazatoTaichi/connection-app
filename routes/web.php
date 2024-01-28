@@ -6,6 +6,7 @@ use App\Http\Controllers\ChatController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\GroupChatController;
 /*
@@ -54,7 +55,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/posts', [PostController::class, 'store'])->name('post.store');
     Route::get('/posts/{post}', [PostController::class, 'show'])->name('post.show');
 
+    //コメント機能
     Route::post('/comments', [CommentController::class, 'store'])->name('comment.store');
+
+    //いいね機能
+    Route::post('/likes/{post}', [LikeController::class, 'like'])->name('like');
+    Route::delete('/likes/{post}', [LikeController::class, 'unlike'])->name('unlike');
 
     //グループチャット画面関係
     Route::get('/groups', [GroupController::class, 'index'])->name('group.index');
