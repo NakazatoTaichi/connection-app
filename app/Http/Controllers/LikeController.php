@@ -23,9 +23,8 @@ class LikeController extends Controller
 
     public function unlike(Request $request, Post $post)
     {
-        $user=Auth::user()->id;
-
-        $like=like::where('post_id', $post->id)->where('user_id', $user)->first();
+        $user = Auth::user()->id;
+        $like = like::where('post_id', $post->id)->where('user_id', $user)->first();
         $like->delete();
 
         return back();
