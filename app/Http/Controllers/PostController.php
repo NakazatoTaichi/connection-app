@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Friend;
 use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Str;
@@ -15,9 +16,17 @@ class PostController extends Controller
     public function index()
     {
         $user = Auth::user();
+        //ホームの投稿ポスト
         $posts = Post::latest()->get();
+        //あなたの投稿ポスト
+        $user_posts = Post::where('user_id', $user->id)->latest()->get();
+        //友だちの投稿ポスト
+        $friend_users = Friend::where('user_id', $user->id)->get();
+        $friend_posts = Post::whereHas('user.friends', function ($query) use ($friend_users) {
+            $query->whereIn('user_id', $friend_users->pluck('friend_id'));
+        })->latest()->get();
 
-        return view('posts.index', compact('user', 'posts'));
+        return view('posts.index', compact('user', 'posts', 'user_posts', 'friend_posts'));
     }
 
     public function create()
