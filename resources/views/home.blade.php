@@ -6,7 +6,7 @@
 <div class="container pt-3">
     <h3 class="p-2" style="width: fit-content;"><b>友だちの投稿</b></h3>
     <div class="post-list my-4">
-        @foreach($friend_posts as $friend_post)
+        @forelse($friend_posts as $friend_post)
             <div class="friend-post">
                 <div class="post-header d-flex align-items-center">
                     @if ($friend_post->user->icon)
@@ -60,7 +60,11 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="d-flex align-items-center" style="height: 350px;">
+                <p style="margin-left: 20px;">登録されている友だちの投稿はありません</p>
+            </div>
+        @endforelse
     </div>
     <h3 class="p-2" style="width: fit-content;"><b>グループ一覧</b></h3>
     <div class="group-chats-list my-4 d-flex align-items-center">
