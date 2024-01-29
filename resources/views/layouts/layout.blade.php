@@ -28,10 +28,10 @@
             </div>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home')}}">ホーム</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('friend.index') }}">トーク</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('post.index') }}">投稿</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ route('myProfile') }}">マイページ</a></li>
+                    <li class="nav-item"><a class="nav-link layout-button" href="{{ route('home')}}">ホーム</a></li>
+                    <li class="nav-item"><a class="nav-link layout-button" href="{{ route('friend.index') }}">トーク</a></li>
+                    <li class="nav-item"><a class="nav-link layout-button" href="{{ route('post.index') }}">投稿</a></li>
+                    <li class="nav-item"><a class="nav-link layout-button" href="{{ route('myProfile') }}">マイページ</a></li>
                 </ul>
                 <div class="dropdown">
                     <a class="btn btn-secondary btn-sm dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size:1.5rem;">
@@ -81,7 +81,7 @@
     float: left;
 }
 
-.nav-link {
+.layout-button {
     color: white;
     width: 150px;
     margin-left: 20px;
@@ -91,7 +91,7 @@
     border: 2px solid white;
 }
 
-.nav-link:hover {
+.layout-button:hover {
     background-color: #ddd;
     color: black;
 }
