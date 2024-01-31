@@ -10,6 +10,7 @@ use App\Models\Friend;
 use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Str;
+use App\Http\Requests\PostStoreRequest;
 
 class PostController extends Controller
 {
@@ -36,7 +37,7 @@ class PostController extends Controller
         return view('posts.create', compact('user'));
     }
 
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
         $post = Post::create([
             'title' => $request['title'],
