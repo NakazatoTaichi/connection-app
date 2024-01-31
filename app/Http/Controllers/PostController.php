@@ -56,9 +56,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $comments = Comment::where('post_id', $post->id)->latest()->get();
-
         $user = Auth::user();
+        $comments = Comment::where('post_id', $post->id)->latest()->get();
         $likes = Like::where('post_id', $post->id)->where('user_id', $user->id)->first();
 
         return view('posts.show', compact('post', 'comments', 'likes'));
