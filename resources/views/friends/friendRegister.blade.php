@@ -9,6 +9,17 @@
             <h1 class="mt-3" style="margin-bottom: 0;">友だち登録画面</h1>
         </div>
     </div>
+    @if ($errors->any())
+        <ul style="margin-bottom: 0; list-style: none;">
+            @foreach ($errors->all() as $error)
+                <li>
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+    @endif
     <div class="group-form py-4">
         <div class="row justify-content-center">
             <div class="col-md-6 p-3 border border-3 border-success rounded-5 text-center">
