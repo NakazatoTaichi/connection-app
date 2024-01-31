@@ -86,7 +86,7 @@
                 </form>
             </div>
             <div class="text-end">
-                <a href="{{ route('home')}}">戻る</a>
+                <a href="{{ route('post.index')}}">戻る</a>
             </div>
         </div>
     </div>
