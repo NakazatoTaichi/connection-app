@@ -9,6 +9,17 @@
             <h1 class="mt-3" style="margin-bottom: 0;">グループ作成画面</h1>
         </div>
     </div>
+    @if ($errors->any())
+        <ul style="margin-bottom: 0; list-style: none;">
+            @foreach ($errors->all() as $error)
+                <li>
+                    <div class="alert alert-danger">
+                        {{ $error }}
+                    </div>
+                </li>
+            @endforeach
+        </ul>
+    @endif
     <div class="group-form py-4">
         <div class="row justify-content-center">
             <div class="col-md-6 p-3 border border-3 border-success rounded-5">
@@ -16,11 +27,11 @@
                     @csrf
                     <div class="form-group mb-3" style="font-size: 1.5rem;">
                         <label for="group_name">グループ名</label>
-                        <input type="text" class="form-control border-2" name="group_name" id="group_name">
+                        <input type="text" class="form-control border-2" name="group_name" id="group_name" value="{{ old('group_name') }}" required>
                     </div>
                     <div class="form-group mb-3" style="font-size: 1.5rem;">
                         <label for="group_description">グループ情報</label>
-                        <textarea type="text" class="form-control border-2" name="group_description" id="group_description"></textarea>
+                        <textarea type="text" class="form-control border-2" name="group_description" id="group_description" required>{{ old('group_description') }}</textarea>
                     </div>
                     <div class="form-group mb-3" style="font-size: 1.5rem; height: 240px;">
                         <label for="group_icon">イメージ画像</label>
