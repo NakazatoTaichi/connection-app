@@ -10,6 +10,7 @@ use App\Models\Post;
 use App\Models\Friend;
 use App\Models\Group;
 use Illuminate\Support\Str;
+use App\Http\Requests\UserRegisterRequest;
 
 
 class UserController extends Controller
@@ -19,9 +20,9 @@ class UserController extends Controller
         return view('register');
     }
 
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request)
     {
-        $user = User::query()->create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
