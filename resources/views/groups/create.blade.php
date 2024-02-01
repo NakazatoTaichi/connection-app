@@ -34,7 +34,7 @@
                         <textarea type="text" class="form-control border-2" name="group_description" id="group_description" required>{{ old('group_description') }}</textarea>
                     </div>
                     <div class="form-group mb-3" style="font-size: 1.5rem; height: 240px;">
-                        <label for="group_icon">イメージ画像</label>
+                        <label for="group_icon">グループアイコン</label>
                         <input type="file" class="form-control-file" name="group_icon" id="group_icon" onchange="previewImage()">
                         <img id="preview">
                     </div>
