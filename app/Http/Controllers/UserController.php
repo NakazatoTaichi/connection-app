@@ -112,6 +112,8 @@ class UserController extends Controller
             return redirect()->intended('home');
         }
 
-        return back();
+        return back()->withErrors([
+            'email' => 'メールアドレスまたはパスワードが間違っています',
+        ]);
     }
 }
