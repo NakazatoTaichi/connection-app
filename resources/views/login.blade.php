@@ -14,7 +14,7 @@
             <div class="card-body p-5">
                 <h1 class="card-title text-center">ログイン画面</h1>
                 @if ($errors->any())
-                    <ul style="margin-bottom: 0; list-style: none;">
+                    <ul style="margin-bottom: 0; list-style: none; padding: 0;">
                         @foreach ($errors->all() as $error)
                             <li>
                                 <div class="alert alert-danger">
