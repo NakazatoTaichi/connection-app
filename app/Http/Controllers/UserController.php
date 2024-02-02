@@ -11,6 +11,7 @@ use App\Models\Friend;
 use App\Models\Group;
 use Illuminate\Support\Str;
 use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserMyProfileRequest;
 
 
 class UserController extends Controller
@@ -60,10 +61,8 @@ class UserController extends Controller
         return view('myProfile', ['user' => $user]);
     }
 
-    public function updateProfile(Request $request, User $user)
+    public function updateProfile(UserMyProfileRequest $request, User $user)
     {
-        // $user = Auth::user();
-
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         // パスワードの変更があれば処理
