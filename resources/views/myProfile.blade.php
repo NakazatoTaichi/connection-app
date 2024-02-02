@@ -4,7 +4,7 @@
 
 @section('main')
 <div class="container mt-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center align-items-center" style="height: 85vh;">
         <div class="col-md-8 bg-light">
             <div class="row justify-content-center">
                 <div class="col-md-8">
@@ -14,15 +14,15 @@
                         @csrf
                         <div class="form-group mb-3" style="font-size: 1.5rem;">
                             <label for="name">名前</label>
-                            <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}">
+                            <input type="text" class="form-control border border-2" name="name" id="name" value="{{$user->name}}">
                         </div>
                         <div class="form-group mb-3" style="font-size: 1.5rem;">
                             <label for="email">メールアドレス</label>
-                            <input type="email" class="form-control" name="email" id="email" value="{{$user->email}}">
+                            <input type="email" class="form-control border border-2" name="email" id="email" value="{{$user->email}}">
                         </div>
                         <div class="form-group mb-3" style="font-size: 1.5rem;">
                             <label for="password">パスワード</label>
-                            <input type="password" class="form-control" name="password" id="password" value="{{$user->password}}">
+                            <input type="password" class="form-control border border-2" name="password" id="password" value="{{$user->password}}">
                         </div>
                         <div class="form-group mb-3" style="font-size: 1.5rem; height: 250px;">
                             <label for="icon">アイコン画像</label>
