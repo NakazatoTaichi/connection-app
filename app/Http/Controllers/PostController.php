@@ -10,6 +10,7 @@ use App\Models\Friend;
 use App\Models\Comment;
 use App\Models\Like;
 use Illuminate\Support\Str;
+use App\Http\Requests\PostStoreRequest;
 
 class PostController extends Controller
 {
@@ -36,7 +37,7 @@ class PostController extends Controller
         return view('posts.create', compact('user'));
     }
 
-    public function store(Request $request)
+    public function store(PostStoreRequest $request)
     {
         $post = Post::create([
             'title' => $request['title'],
@@ -56,9 +57,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $comments = Comment::where('post_id', $post->id)->latest()->get();
-
         $user = Auth::user();
+        $comments = Comment::where('post_id', $post->id)->latest()->get();
         $likes = Like::where('post_id', $post->id)->where('user_id', $user->id)->first();
 
         return view('posts.show', compact('post', 'comments', 'likes'));

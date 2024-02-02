@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Friend;
-
+use App\Http\Requests\FriendRegisterRequest;
 
 class FriendController extends Controller
 {
@@ -28,7 +28,7 @@ class FriendController extends Controller
         return view('friends.friendRegister', compact('user', 'friend_info_message'));
     }
 
-    public function store(Request $request)
+    public function store(FriendRegisterRequest $request)
     {
         $user = Auth::user();
         $user = User::find($user->id);
@@ -56,7 +56,6 @@ class FriendController extends Controller
     public function register(Request $request)
     {
         $user = Auth::user();
-
         $friend = Friend::create([
             'user_id' => $user->id,
             'friend_id' => $request['friend_id'],

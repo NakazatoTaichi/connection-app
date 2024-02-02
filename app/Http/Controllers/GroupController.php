@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\GroupUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use App\Http\Requests\GroupStoreRequest;
 
 class GroupController extends Controller
 {
@@ -27,7 +28,7 @@ class GroupController extends Controller
         return view('groups.create');
     }
 
-    public function store(Request $request)
+    public function store(GroupStoreRequest $request)
     {
         $user = Auth::user();
         $group = Group::create([

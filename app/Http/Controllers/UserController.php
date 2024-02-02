@@ -10,6 +10,8 @@ use App\Models\Post;
 use App\Models\Friend;
 use App\Models\Group;
 use Illuminate\Support\Str;
+use App\Http\Requests\UserRegisterRequest;
+use App\Http\Requests\UserMyProfileRequest;
 
 
 class UserController extends Controller
@@ -19,9 +21,9 @@ class UserController extends Controller
         return view('register');
     }
 
-    public function register(Request $request)
+    public function register(UserRegisterRequest $request)
     {
-        $user = User::query()->create([
+        $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
@@ -59,10 +61,8 @@ class UserController extends Controller
         return view('myProfile', ['user' => $user]);
     }
 
-    public function updateProfile(Request $request, User $user)
+    public function updateProfile(UserMyProfileRequest $request, User $user)
     {
-        // $user = Auth::user();
-
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         // パスワードの変更があれば処理
@@ -95,10 +95,16 @@ class UserController extends Controller
 
     public function login(Request $request)
     {
+        $messages = [
+            'email.required' => 'メールアドレスを入力してください',
+            'email.email' => '有効なメールアドレスを入力してください',
+            'password.required' => 'パスワードを入力してください',
+        ];
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
-        ]);
+        ], $messages);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
@@ -106,6 +112,8 @@ class UserController extends Controller
             return redirect()->intended('home');
         }
 
-        return back();
+        return back()->withErrors([
+            'email' => 'メールアドレスまたはパスワードが間違っています',
+        ]);
     }
 }

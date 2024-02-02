@@ -13,19 +13,29 @@
         <div class="card col-md-6 mx-auto">
             <div class="card-body p-5">
                 <h1 class="card-title text-center">ログイン画面</h1>
-
+                @if ($errors->any())
+                    <ul style="margin-bottom: 0; list-style: none; padding: 0;">
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                <div class="alert alert-danger">
+                                    {{ $error }}
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
                 <form action="" method="post" class="needs-validation" novalidate>
                     @csrf
 
                     <div class="form-group">
                         <label for="email">メールアドレス</label>
-                        <input type="email" name="email" id="email" class="form-control" required>
+                        <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" required>
                         <div class="invalid-feedback">メールアドレスを入力してください。</div>
                     </div>
 
                     <div class="form-group">
                         <label for="password">パスワード</label>
-                        <input type="password" name="password" id="password" class="form-control" required>
+                        <input type="password" name="password" id="password" class="form-control" value="{{ old('password') }}" required>
                         <div class="invalid-feedback">パスワードを入力してください。</div>
                     </div>
 
