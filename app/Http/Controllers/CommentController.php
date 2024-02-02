@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Comment;
 use App\Models\Post;
+use App\Http\Requests\CommentStoreRequest;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
+    public function store(CommentStoreRequest $request)
     {
         $user = Auth::user();
 

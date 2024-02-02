@@ -76,11 +76,22 @@
             </div>
             <div class="commnet-form">
                 <hr>
+                @if ($errors->any())
+                    <ul style="margin-bottom: 0; list-style: none;">
+                        @foreach ($errors->all() as $error)
+                            <li>
+                                <div class="alert alert-danger">
+                                    {{ $error }}
+                                </div>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
                 <p style="margin:0;">コメント</p>
                 <form action="{{ route('comment.store', ['post_id' => $post->id])}}" method="POST">
                     @csrf
                     <div class="input-group">
-                        <input type="text" name='comment' class="form-control" style="font-size: 1.5rem;" aria-label="コメントを入力" aria-describedby="button-send">
+                        <input type="text" name='comment' class="form-control" style="font-size: 1.5rem;" aria-label="コメントを入力" aria-describedby="button-send" required>
                         <button class="btn btn-primary" type="submit" id="button-send">送信</button>
                     </div>
                 </form>
