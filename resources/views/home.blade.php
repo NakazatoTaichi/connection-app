@@ -78,8 +78,8 @@
                     <div class="group-icon m-auto">
                         @if ($public_group->group_icon)
                             <img src="{{ asset('storage/group_icons/' . $public_group->group_icon )}}" alt="icon" class="img-fluid rounded-circle border border-3">
-                        {{-- @elseif ($public_group->group_icon->null)
-                            <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div> --}}
+                        @elseif ($public_group->group_icon->null)
+                            <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div>
                         @else
                             <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div>
                         @endif
