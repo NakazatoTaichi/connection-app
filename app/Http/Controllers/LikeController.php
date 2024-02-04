@@ -18,7 +18,8 @@ class LikeController extends Controller
         $like->user_id = $user->id;
         $like->save();
 
-        return back();
+        // return back();
+        return response()->json(['message' => 'Liked!']);
     }
 
     public function unlike(Request $request, Post $post)
