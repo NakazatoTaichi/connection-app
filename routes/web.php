@@ -61,6 +61,12 @@ Route::middleware('auth')->group(function () {
     //いいね機能
     Route::post('/likes/{post}', [LikeController::class, 'like'])->name('like');
     Route::delete('/likes/{post}', [LikeController::class, 'unlike'])->name('unlike');
+    //ホーム画面のいいね機能
+    Route::post('/likes/home/{post}', [LikeController::class, 'homePostLike'])->name('homePostLike');
+    Route::delete('/likes/home/{post}', [LikeController::class, 'homePostUnlike'])->name('homePostUnlike');
+    //投稿画面のいいね機能
+    Route::post('/likes/posting/{post}', [LikeController::class, 'postingPostLike'])->name('postingPostLike');
+    Route::delete('/likes/posting/{post}', [LikeController::class, 'postingPostUnlike'])->name('postingPostUnlike');
 
     //グループチャット画面関係
     Route::get('/groups', [GroupController::class, 'index'])->name('group.index');
