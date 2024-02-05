@@ -59,7 +59,7 @@
                 </div>
             </div>
             <hr>
-            <div class="comment-list overflow-scroll" style="height: 360px;">
+            <div class="comment-list overflow-scroll " style="height: 360px;">
                 @forelse($comments as $comment)
                     <div class="comment-content d-flex align-items-center">
                         @if ($comment->user->icon)
@@ -91,12 +91,16 @@
                 <form action="{{ route('comment.store', ['post_id' => $post->id])}}" method="POST">
                     @csrf
                     <div class="input-group">
-                        <input type="text" name='comment' class="form-control" style="font-size: 1.5rem;" aria-label="コメントを入力" aria-describedby="button-send" required>
-                        <button class="btn btn-primary" type="submit" id="button-send">送信</button>
+                        <input type="text" name='comment' class="form-control border-2" style="font-size: 1.5rem;" aria-label="コメントを入力" aria-describedby="button-send" required>
+                        <button class="btn btn-primary" type="submit" id="button-send">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="25" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+                            </svg>
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="text-end">
+            <div class="text-end mt-4">
                 <a href="{{ route('post.index')}}">戻る</a>
             </div>
         </div>
@@ -104,6 +108,10 @@
 </div>
 @endsection
 <style>
+    .post-content {
+        height: 200px;
+        overflow-y: auto;
+    }
     .posted_screen {
         border: 2px solid black;
         display: block;
@@ -115,5 +123,11 @@
         border: none;
         outline: none;
         background: transparent;
+    }
+
+    hr {
+        height: 2px;
+        background-color: #000;
+        border: none;
     }
 </style>
