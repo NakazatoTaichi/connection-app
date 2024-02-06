@@ -4,6 +4,11 @@
 
 @section('main')
 <div class="container mt-5 w-75 p-3" style="margin: auto;">
+    @if (session('flash_message'))
+        <div class="alert alert-success text-center py-3 my-0" role="alert">
+            {{ session('flash_message') }}
+        </div>
+    @endif
     <div class="row align-items-end">
         <div class="col-md-9">
             <h1 class="mt-3" style="margin-bottom: 0;">グループリスト</h1>
