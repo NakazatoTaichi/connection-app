@@ -62,6 +62,7 @@ class FriendController extends Controller
         ]);
         $friend->save();
 
-        return redirect()->route('friend.index');
+        $friend_name = User::find($friend->friend_id)->name;
+        return redirect()->route('friend.index')->with('flash_message', $friend_name . 'と友だちになりました');
     }
 }

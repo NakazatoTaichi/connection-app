@@ -48,7 +48,7 @@ class GroupController extends Controller
             'user_id' => $user->id,
         ]);
 
-        return redirect()->route('group.index', compact('group'));
+        return redirect()->route('group.index', compact('group'))->with('flash_message', '新しいグループを作成しました');
     }
 
     public function show(Group $group)
