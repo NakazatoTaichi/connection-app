@@ -28,6 +28,11 @@
     </div>
     <div class="group-list py-3 overflow-scroll" style="height: 550px;">
         @forelse ($participated_groups as $participated_group)
+        @php
+            $latestMessage = $latest_group_messages->first(function ($message) use ($group_users, $participated_group) {
+                return $message->user_id == $group_users->id || $message->group_id == $participated_group->id;
+            });
+        @endphp
         <div class="group-wrapper mb-4 border border-dark-subtle rounded-5 p-3">
             <div class="friend-container row align-items-center">
                 <div class="col-md-1">
@@ -42,6 +47,11 @@
                         <p style="margin: 0;">{{$participated_group->group_name}}</p>
                     </a>
                 </div>
+                @if ($latestMessage)
+                    <div class="col-md-7">
+                        <p class="text-overflow" style="margin: 0; opacity:0.5; max-width: 550px;">{{$latestMessage->message}}</p>
+                    </div>
+                @endif
             </div>
         </div>
         @empty
