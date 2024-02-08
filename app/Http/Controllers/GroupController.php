@@ -21,9 +21,6 @@ class GroupController extends Controller
         })->get();
         $participated_groupsId = $participated_groups->pluck('id');
 
-        // $group_user = GroupUser::whereIn('group_id', $participated_groupsId)->get();
-        // $group_user_ids = $group_user->pluck('user_id');
-
         $latest_group_messages = collect();
         foreach ($participated_groupsId as $participated_groupId) {
             $group_user = GroupUser::where('group_id', $participated_groupId)->get();
