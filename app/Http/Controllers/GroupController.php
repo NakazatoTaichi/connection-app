@@ -19,8 +19,24 @@ class GroupController extends Controller
         $participated_groups = Group::whereHas('users', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->get();
+        $participated_groupsId = $participated_groups->pluck('id');
 
-        return view('groups.index', compact('participated_groups'));
+        $latest_group_messages = collect();
+        foreach ($participated_groupsId as $participated_groupId) {
+            $group_user = GroupUser::where('group_id', $participated_groupId)->get();
+            $group_user_ids = $group_user->pluck('user_id');
+            $latest_group_message = GroupMessage::where(function ($query) use ($user, $participated_groupId) {
+                $query->where('user_id', $user->id)->where('group_id', $participated_groupId);
+            })->orWhere(function ($query) use ($group_user_ids, $participated_groupId) {
+                $query->whereIn('user_id', $group_user_ids)->where('group_id', $participated_groupId);
+            })->latest()->first();
+
+            if ($latest_group_message) {
+                $latest_group_messages->push($latest_group_message);
+            }
+        }
+
+        return view('groups.index', compact('participated_groups', 'group_user', 'latest_group_messages'));
     }
 
     public function create()

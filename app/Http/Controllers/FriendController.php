@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Friend;
+use App\Models\Chat;
 use App\Http\Requests\FriendRegisterRequest;
 
 class FriendController extends Controller
@@ -15,8 +16,22 @@ class FriendController extends Controller
         $user = Auth::user();
         $user = User::find($user->id);
         $friends = $user->friends()->get();
+        $friendsId = $friends->pluck('id');
 
-        return view('friends.index', compact('friends'));
+        $latest_user_friend_messages = collect();
+        foreach ($friendsId as $friendId) {
+            $latest_user_friend_message = Chat::where(function ($query) use ($user, $friendId) {
+                $query->where('user_id', $user->id)->where('recipient_id', $friendId);
+            })->orWhere(function ($query) use ($user, $friendId) {
+                $query->where('user_id', $friendId)->where('recipient_id', $user->id);
+            })->latest()->first();
+
+            if ($latest_user_friend_message) {
+                $latest_user_friend_messages->push($latest_user_friend_message);
+            }
+        }
+
+        return view('friends.index', compact('friends', 'latest_user_friend_messages'));
     }
 
     public function friendRegister()

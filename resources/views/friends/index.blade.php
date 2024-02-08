@@ -28,6 +28,11 @@
     </div>
     <div class="friend-list py-3 overflow-scroll" style="height: 550px;">
         @forelse ($friends as $friend)
+        @php
+            $latestMessage = $latest_user_friend_messages->first(function ($message) use ($friend) {
+                return $message->user_id == $friend->id || $message->recipient_id == $friend->id;
+            });
+        @endphp
         <div class="friend-wrapper mb-4 border border-dark-subtle rounded-5 p-3">
             <div class="friend-container row align-items-center">
                 <div class="col-md-1">
@@ -42,6 +47,11 @@
                         <p style="margin: 0;">{{$friend->name}}</p>
                     </a>
                 </div>
+                @if ($latestMessage)
+                    <div class="col-md-7">
+                        <p class="text-overflow" style="margin: 0; opacity:0.5; max-width: 550px;">{{$latestMessage->message}}</p>
+                    </div>
+                @endif
             </div>
         </div>
         @empty
@@ -50,3 +60,10 @@
     </div>
 </div>
 @endsection
+<style>
+    .text-overflow {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+</style>
