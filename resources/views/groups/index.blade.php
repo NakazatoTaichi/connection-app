@@ -29,9 +29,16 @@
     <div class="group-list py-3 overflow-scroll" style="height: 550px;">
         @forelse ($participated_groups as $participated_group)
         @php
-            $latestMessage = $latest_group_messages->first(function ($message) use ($group_users, $participated_group) {
-                return $message->user_id == $group_users->id || $message->group_id == $participated_group->id;
-            });
+            $latestMessage = null;
+            foreach ($group_user as $user) {
+                $latestMessage = $latest_group_messages->first(function ($message) use ($user, $participated_group) {
+                    return $message->user_id == $user->id || $message->group_id == $participated_group->id;
+                });
+
+                if ($latestMessage) {
+                    break;
+                }
+            }
         @endphp
         <div class="group-wrapper mb-4 border border-dark-subtle rounded-5 p-3">
             <div class="friend-container row align-items-center">

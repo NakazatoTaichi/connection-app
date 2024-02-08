@@ -21,11 +21,13 @@ class GroupController extends Controller
         })->get();
         $participated_groupsId = $participated_groups->pluck('id');
 
-        $group_users = GroupUser::whereIn('group_id', $participated_groupsId)->get();
-        $group_user_ids = $group_users->pluck('user_id');
+        // $group_user = GroupUser::whereIn('group_id', $participated_groupsId)->get();
+        // $group_user_ids = $group_user->pluck('user_id');
 
         $latest_group_messages = collect();
         foreach ($participated_groupsId as $participated_groupId) {
+            $group_user = GroupUser::where('group_id', $participated_groupId)->get();
+            $group_user_ids = $group_user->pluck('user_id');
             $latest_group_message = GroupMessage::where(function ($query) use ($user, $participated_groupId) {
                 $query->where('user_id', $user->id)->where('group_id', $participated_groupId);
             })->orWhere(function ($query) use ($group_user_ids, $participated_groupId) {
@@ -37,7 +39,7 @@ class GroupController extends Controller
             }
         }
 
-        return view('groups.index', compact('participated_groups', 'group_users', 'latest_group_messages'));
+        return view('groups.index', compact('participated_groups', 'group_user', 'latest_group_messages'));
     }
 
     public function create()
