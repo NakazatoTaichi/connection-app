@@ -45,9 +45,6 @@
             </div>
         </div>
     </div>
-    <div class="my-3 text-end">
-        <a class="btn btn-primary" href="{{route('group.index')}}">戻る</a>
-    </div>
 </div>
 @endsection
 
