@@ -16,7 +16,7 @@
                 @endforeach
             </ul>
         @endif
-        <div class="col-md-6 px-5 border border-3 border-secondary-subtle rounded-5">
+        <div class="col-md-6 mt-3 px-5 border border-3 border-secondary-subtle rounded-5">
             <h1 class="text-center my-4" style="font-weight: bold;">プロフィール画面</h1>
             <hr style="border: 3px solid #8c8b8b;">
             <form action="{{ route('updateProfile', ['user' => $user->id]) }}" method="post" enctype="multipart/form-data">

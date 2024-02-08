@@ -24,7 +24,7 @@
         <div class="mb-5 post-list d-flex">
             @foreach($posts as $post)
             <div class="col-5">
-                <div class="card mx-4 border border-2 border-dark" style="height: auto">
+                <div class="card mx-4 border border-2 border-dark" style="height: auto" id="posting-{{ $post->id }}">
                     <div class="post-header d-flex align-items-center">
                         @if ($post->user->icon)
                             <img src="{{ asset('storage/icons/' . $post->user->icon )}}" alt="icon" class="img-fluid rounded-circle m-2" style="width: 50px; height: 50px;">
@@ -53,7 +53,7 @@
                             </div>
                             <div class="like-action">
                                 @if ($post->getExistLike($post->id, $user))
-                                    <form action="{{ route('unlike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
+                                    <form action="{{ route('postingPostUnlike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" style="color: #ff69b4">
@@ -64,7 +64,7 @@
                                     </form>
                                     {{$post->likes->count()}}いいね！
                                 @else
-                                    <form action="{{ route('like', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0; padding: 0;">
+                                    <form action="{{ route('postingPostLike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0; padding: 0;">
                                         @csrf
                                         <button type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
@@ -124,7 +124,7 @@
                             </div>
                             <div class="like-action">
                                 @if ($user_post->getExistLike($user_post->id, $user))
-                                    <form action="{{ route('unlike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
+                                    <form action="{{ route('postingPostUnlike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" style="color: #ff69b4">
@@ -135,7 +135,7 @@
                                     </form>
                                     {{$user_post->likes->count()}}いいね！
                                 @else
-                                    <form action="{{ route('like', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0; padding: 0;">
+                                    <form action="{{ route('postingPostLike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0; padding: 0;">
                                         @csrf
                                         <button type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
@@ -195,7 +195,7 @@
                             </div>
                             <div class="like-action">
                                 @if ($friend_post->getExistLike($friend_post->id, $user))
-                                    <form action="{{ route('unlike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
+                                    <form action="{{ route('postingPostUnlike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" style="color: #ff69b4">
@@ -206,7 +206,7 @@
                                     </form>
                                     {{$friend_post->likes->count()}}いいね！
                                 @else
-                                    <form action="{{ route('like', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0; padding: 0;">
+                                    <form action="{{ route('postingPostLike', $post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0; padding: 0;">
                                         @csrf
                                         <button type="submit">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
@@ -256,3 +256,15 @@
         background: transparent;
     }
 </style>
+<script>
+    window.addEventListener('load', function() {
+        const params = new URLSearchParams(window.location.search);
+        const postId = params.get('post');
+        if (postId) {
+            const element = document.getElementById('posting-' + postId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+            }
+        }
+    });
+</script>

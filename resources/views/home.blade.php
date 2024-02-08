@@ -7,7 +7,7 @@
     <h3 class="p-2" style="width: fit-content;"><b>友だちの投稿</b></h3>
     <div class="post-list my-4">
         @forelse($friend_posts as $friend_post)
-            <div class="friend-post">
+            <div class="friend-post" id="post-{{ $friend_post->id }}">
                 <div class="post-header d-flex align-items-center">
                     @if ($friend_post->user->icon)
                         <img src="{{ asset('storage/icons/' . $friend_post->user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 35px; height: 35px;">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="like-action">
                         @if ($friend_post->getExistLike($friend_post->id, $user))
-                            <form action="{{ route('unlike', $friend_post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
+                            <form action="{{ route('homePostUnlike', $friend_post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" style="color: #ff69b4; padding: 0;" class="m-2">
@@ -45,7 +45,7 @@
                                 </button>
                             </form>
                         @else
-                            <form action="{{ route('like', $friend_post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
+                            <form action="{{ route('homePostLike', $friend_post) }}" method="POST" class="d-inline-flex align-items-center" style="margin: 0;">
                                 @csrf
                                 <button type="submit" style="padding: 0;" class="m-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="currentColor" class="bi bi-suit-heart" viewBox="0 0 16 16">
@@ -108,7 +108,6 @@
         display: none;
     }
     .friend-post {
-        /* height: 350px; */
         width: 286px;
         margin-right: 50px;
         border: 2px solid black;
@@ -189,4 +188,16 @@
         width: 80px;
         border-radius: 50%;
     }
-    </style>
+</style>
+<script>
+    window.addEventListener('load', function() {
+        const params = new URLSearchParams(window.location.search);
+        const postId = params.get('post');
+        if (postId) {
+            const element = document.getElementById('post-' + postId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', inline: 'start' });
+            }
+        }
+    });
+</script>
