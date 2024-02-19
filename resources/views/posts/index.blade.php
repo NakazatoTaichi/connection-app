@@ -21,7 +21,7 @@
                 <span style="font-size: 1.5rem; margin-left: 5px;">投稿</span>
             </a>
         </div>
-        <div class="mb-5 post-list d-flex">
+        <div class="mb-5 post-list js-scrollable d-flex">
             @foreach($posts as $post)
             <div class="col-5">
                 <div class="card mx-4 border border-2 border-dark" style="height: auto">
