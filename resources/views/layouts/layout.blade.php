@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    {{-- スクロールヒント --}}
+    <link rel="stylesheet" href="https://unpkg.com/scroll-hint@latest/css/scroll-hint.css">
     <title>@yield('title')</title>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    {{-- スクロールヒント --}}
+    <script src="https://unpkg.com/scroll-hint@latest/js/scroll-hint.min.js"></script>
     <style>
         p {
             font-size: 1.5rem;
@@ -114,5 +118,12 @@
     margin-top: 116px;
 }
 </style>
+<script>
+    new ScrollHint('.js-scrollable', {
+        i18n: {
+            scrollable: 'スクロールできます'
+        }
+    });
+</script>
 </body>
 </html>
