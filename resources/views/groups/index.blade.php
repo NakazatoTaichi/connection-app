@@ -30,6 +30,7 @@
         @forelse ($participated_groups as $participated_group)
         @php
             $latestMessage = null;
+            $group_user = App\Models\GroupUser::where('group_id', $participated_group->id)->get();
             foreach ($group_user as $user) {
                 $latestMessage = $latest_group_messages->first(function ($message) use ($user, $participated_group) {
                     return $message->user_id == $user->id || $message->group_id == $participated_group->id;

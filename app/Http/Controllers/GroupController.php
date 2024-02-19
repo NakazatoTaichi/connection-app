@@ -36,7 +36,7 @@ class GroupController extends Controller
             }
         }
 
-        return view('groups.index', compact('participated_groups', 'group_user', 'latest_group_messages'));
+        return view('groups.index', compact('participated_groups', 'latest_group_messages'));
     }
 
     public function create()
