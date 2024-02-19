@@ -5,7 +5,7 @@
 @section('main')
 <div class="container pt-3">
     <h3 class="p-2" style="width: fit-content;"><b>友だちの投稿</b></h3>
-    <div class="post-list my-4">
+    <div class="post-list my-4 js-scrollable">
         @forelse($friend_posts as $friend_post)
             <div class="friend-post">
                 <div class="post-header d-flex align-items-center">
@@ -67,7 +67,7 @@
         @endforelse
     </div>
     <h3 class="p-2" style="width: fit-content;"><b>グループ一覧</b></h3>
-    <div class="group-chats-list my-4 d-flex align-items-center">
+    <div class="group-chats-list js-scrollable my-4 d-flex align-items-center">
         @foreach($public_groups as $public_group)
         <div class="group-chat" style="margin-right: 10px; border: 2px solid black;">
             <a href="{{ route('group.show', ['group' => $public_group->id]) }}">
@@ -189,4 +189,4 @@
         width: 80px;
         border-radius: 50%;
     }
-    </style>
+</style>
