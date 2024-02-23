@@ -89,6 +89,17 @@
             word-wrap: break-word;
             margin-left: 0;
             font-size: 24px;
+            position: relative;
+        }
+        .recived-message::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border: 8px solid  transparent;
+            position:absolute;
+            top: 12px;
+            left: -16px;
+            border-right-color: #fff;
         }
         .sent-message {
             background-color: #3490dc;
@@ -100,6 +111,17 @@
             word-wrap: break-word;
             font-size: 24px;
             text-align: left;
+            position: relative;
+        }
+        .sent-message::before {
+            content: '';
+            width: 0;
+            height: 0;
+            border: 8px solid  transparent;
+            position:absolute;
+            top: 12px;
+            right: -16px;
+            border-right-color: #fff;
         }
         .timestamp {
             color: #777;
