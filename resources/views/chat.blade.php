@@ -35,7 +35,7 @@
                                 <div class="message-container d-flex justify-content-start text-start">
                                     <div class="align-self-start">
                                         @if ($user->icon)
-                                            <img src="{{ asset('storage/icons/' . $user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px; margin-right: 5px;">
+                                            <img src="{{ asset('storage/icons/' . $user->icon )}}" alt="icon" class="img-fluid rounded-circle" style="width: 50px; height: 50px; margin-right: 15px;">
                                         @else
                                             <div class="icon-placeholder rounded-circle" style="width: 50px; height: 50px; background-color: #CCCCCC; margin-right: 5px;"></div>
                                         @endif
@@ -91,15 +91,15 @@
             font-size: 24px;
             position: relative;
         }
-        .recived-message::before {
+        .received-message::before {
             content: '';
             width: 0;
             height: 0;
             border: 8px solid  transparent;
             position:absolute;
-            top: 12px;
+            top: 15px;
             left: -16px;
-            border-right-color: #fff;
+            border-right-color: #f0f0f0;
         }
         .sent-message {
             background-color: #3490dc;
@@ -111,17 +111,6 @@
             word-wrap: break-word;
             font-size: 24px;
             text-align: left;
-            position: relative;
-        }
-        .sent-message::before {
-            content: '';
-            width: 0;
-            height: 0;
-            border: 8px solid  transparent;
-            position:absolute;
-            top: 12px;
-            right: -16px;
-            border-right-color: #fff;
         }
         .timestamp {
             color: #777;
@@ -169,7 +158,7 @@
                     iconImg.src = '/storage/icons/' + data.user.icon;
                     iconImg.alt = "icon";
                     iconImg.className = "img-fluid rounded-circle";
-                    iconImg.style = "width: 50px; height: 50px; margin-right: 5px;";
+                    iconImg.style = "width: 50px; height: 50px; margin-right: 15px;";
                     iconDiv.appendChild(iconImg);
                 } else {
                     iconDiv.className = "icon-placeholder rounded-circle";
