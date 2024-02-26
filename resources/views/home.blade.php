@@ -69,23 +69,25 @@
     <h3 class="p-2" style="width: fit-content;"><b>グループ一覧</b></h3>
     <div class="group-chats-list js-scrollable my-4 d-flex align-items-center">
         @foreach($public_groups as $public_group)
-        <div class="group-chat" style="margin-right: 10px; border: 2px solid black;">
-            <a href="{{ route('group.show', ['group' => $public_group->id]) }}">
-                <div class="group-chat-name text-center">
-                    <p class="p-3" style="margin: 0; font-size: 1.25rem;">{{$public_group->group_name}}</p>
+            @if($public_group->getGroupStatus($public_group) === '公開')
+                <div class="group-chat" style="margin-right: 10px; border: 2px solid black;">
+                    <a href="{{ route('group.show', ['group' => $public_group->id]) }}">
+                        <div class="group-chat-name text-center">
+                            <p class="p-3" style="margin: 0; font-size: 1.25rem;">{{$public_group->group_name}}</p>
+                        </div>
+                        <div class="group-chat-main d-flex flex-column">
+                            <div class="group-icon m-auto">
+                                @if ($public_group->group_icon)
+                                    <img src="{{ asset('storage/group_icons/' . $public_group->group_icon )}}" alt="icon" class="img-fluid rounded-circle border border-3">
+                                @else
+                                    <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div>
+                                @endif
+                            </div>
+                            <p class="text-center" style="margin: 0; font-size: 1.25rem;">メンバー{{$public_group->groupMemberCount($public_group->id)}}人</p>
+                        </div>
+                    </a>
                 </div>
-                <div class="group-chat-main d-flex flex-column">
-                    <div class="group-icon m-auto">
-                        @if ($public_group->group_icon)
-                            <img src="{{ asset('storage/group_icons/' . $public_group->group_icon )}}" alt="icon" class="img-fluid rounded-circle border border-3">
-                        @else
-                            <div class="icon-placeholder rounded-circle border border-3" style="width: 80px; height: 80px; background-color: #CCCCCC;"></div>
-                        @endif
-                    </div>
-                    <p class="text-center" style="margin: 0; font-size: 1.25rem;">メンバー{{$public_group->groupMemberCount($public_group->id)}}人</p>
-                </div>
-            </a>
-        </div>
+            @endif
         @endforeach
     </div>
 </div>

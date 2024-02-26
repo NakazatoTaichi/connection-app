@@ -10,9 +10,18 @@ class Group extends Model
 {
     use HasFactory;
 
+    const STATUS_PUBLIC = 1;
+    const STATUS_PRIVATE = 2;
+
+    const GROUP_STATUS = [
+        self::STATUS_PUBLIC => "公開",
+        self::STATUS_PRIVATE => "非公開",
+    ];
+
     protected $fillable = [
         'group_name',
         'group_description',
+        'status'
     ];
 
     public function users()
@@ -30,5 +39,10 @@ class Group extends Model
         $group_member_count = GroupUser::where('group_id', $group_id)->count();
 
         return $group_member_count;
+    }
+
+    public function getGroupStatus($group)
+    {
+        return self::GROUP_STATUS[$group->status];
     }
 }

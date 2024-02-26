@@ -50,6 +50,7 @@ class GroupController extends Controller
         $group = Group::create([
             'group_name' => $request['group_name'],
             'group_description' => $request['group_description'],
+            'status' => $request['status'],
         ]);
 
         if ($request->hasFile('group_icon')) {

@@ -33,12 +33,20 @@
                         <label for="group_description">グループ情報</label>
                         <textarea type="text" class="form-control border-2" name="group_description" id="group_description" required>{{ old('group_description') }}</textarea>
                     </div>
+                    <div class="form-group mb-3" style="font-size: 1.5rem;">
+                        <label for="group_description">グループの公開状況</label>
+                        <select name="status" class="form-control">
+                            @foreach(\App\Models\Group::GROUP_STATUS as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-group mb-3" style="font-size: 1.5rem; height: 240px;">
                         <label for="group_icon">グループアイコン</label>
                         <input type="file" class="form-control-file" name="group_icon" id="group_icon" onchange="previewImage()">
                         <img id="preview">
                     </div>
-                    <div class="mb-4 text-center">
+                    <div class="text-center">
                         <button type="submit" class="btn btn-primary btn-block" style="font-size: 1.5rem; width: 150px;">作成</button>
                     </div>
                 </form>
