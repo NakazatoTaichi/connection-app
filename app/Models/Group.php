@@ -40,4 +40,9 @@ class Group extends Model
 
         return $group_member_count;
     }
+
+    public function getGroupStatus($group)
+    {
+        return self::GROUP_STATUS[$group->status];
+    }
 }
