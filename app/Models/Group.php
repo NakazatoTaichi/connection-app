@@ -13,6 +13,7 @@ class Group extends Model
     protected $fillable = [
         'group_name',
         'group_description',
+        'status'
     ];
 
     public function users()
